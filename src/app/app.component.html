@@ -1,18 +1,32 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
+<div class="container">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="drawermenu.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="title">{{ title }}</h1>
+  </mat-toolbar>
 
-  <h2><app-first-component></app-first-component></h2>
+  <mat-sidenav-container class="drawer-container" autosize>
+    <mat-sidenav
+      #drawermenu
+      mode="over"
+      [(opened)]="opened"
+      (opened)="events.push('open!')"
+      (closed)="events.push('close!')"
+      fixedTopGap="56"
+    >
+      <h1>Sidenav content</h1>
+      <mat-nav-list>
+        <div *ngFor="let e of events">{{ e }}</div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <h1>Main content</h1>
+      <p>
+        <button mat-button (click)="drawermenu.toggle()">TOGGLE MENU</button>
+      </p>
 
-  <h3><app-second-component></app-second-component></h3>
-
-  <h4><app-cursos></app-cursos></h4>
-
-  <br>
-  <app-third></app-third>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-
-
-
