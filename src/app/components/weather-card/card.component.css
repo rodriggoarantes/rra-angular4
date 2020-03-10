@@ -1,24 +1,18 @@
 .card {
+  background-color: white;
+  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
   justify-items: center;
   padding: 2rem;
   margin: 2rem;
-  width: 19rem;
+  width: 20rem;
   height: 30rem;
   cursor: pointer;
-  background-color: white;
   border-radius: 1.75rem;
   animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0ms 1;
-}
-
-.card-add {
-  cursor: auto;
-  margin: 0 auto;
-  box-shadow: rgba(0, 0, 255, 0.5);
-  width: 80%;
+  color: #443282;
 }
 
 .card.dark {
@@ -98,10 +92,6 @@
   margin-bottom: 2rem;
   display: flex;
   justify-content: center;
-}
-
-.weather-icon-container > svg {
-  width: 10rem;
 }
 
 .add-city-btn {

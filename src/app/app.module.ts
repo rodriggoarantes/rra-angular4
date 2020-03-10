@@ -12,13 +12,15 @@ import { HomeComponent } from "@app/pages/home/home.component";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { AddCardComponent } from './components/add-card/add-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     HomeComponent,
-    WeatherIconComponent
+    WeatherIconComponent,
+    AddCardComponent
   ],
   imports: [
     BrowserModule,

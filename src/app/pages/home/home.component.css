@@ -1,0 +1,10 @@
+.home-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 90vh;
+  position: relative;
+
+  background-image: linear-gradient(to top, #5ee7df 0%, #66a6ff 100%);
+}

@@ -2,14 +2,15 @@ import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "weather-icon",
-  templateUrl: "./icon.component.html"
+  template: `
+    <img [src]="icon" [width]="size" [height]="size" />
+  `
 })
 export class WeatherIconComponent implements OnInit {
   private readonly path = "assets";
 
   @Input() state: string = "";
-  @Input() width: string = "50";
-  @Input() height: string = "50";
+  @Input() size: string = "100";
   protected icon: string = "";
 
   constructor() {}

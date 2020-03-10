@@ -20,7 +20,7 @@ import { WeatherService } from "@app/services/weather.service";
   styleUrls: ["./card.component.css"]
 })
 export class CardComponent implements OnInit, OnDestroy {
-  @Input() addMode: boolean = true;
+  @Input() city: string = "Paris";
   @Output() cityStored = new EventEmitter();
 
   citesWeather: Object;
@@ -44,6 +44,8 @@ export class CardComponent implements OnInit, OnDestroy {
     this.themeSubs = this.uiService.darkModeState.subscribe(isDark => {
       this.darkMode = isDark;
     });
+
+    this.loadCity(this.city);
   }
 
   ngOnDestroy() {
@@ -52,13 +54,13 @@ export class CardComponent implements OnInit, OnDestroy {
 
   openDetails() {}
 
-  addCity() {
-    if (this.addMode) {
-    }
-  }
-
   // ---
   private loadCity(city: string) {
+    if (!city) {
+      console.log(`Cidade não informada: ${city}`);
+      return;
+    }
+
     this.cityName = city;
 
     this.weather
