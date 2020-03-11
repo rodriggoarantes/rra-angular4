@@ -30,7 +30,6 @@ export class CardComponent implements OnInit, OnDestroy {
   maxTemp: number;
   minTemp: number;
   cityName = "";
-  cityAdded = false;
 
   private themeSubs: Subscription;
 
@@ -61,13 +60,12 @@ export class CardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.cityName = city;
-
     this.weather
       .getWeather(city)
       .pipe(first())
       .subscribe(
         payload => {
+          this.cityName = city;
           this.state = payload.weather[0].main;
           this.temp = Math.ceil(payload.main.temp);
         },

@@ -1,8 +1,9 @@
 <div class="container">
-  <mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar class="toolbar">
     <button mat-icon-button (click)="drawermenu.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
+    <img class="logo" src="assets/sunshine.png" />
     <h1 class="title">{{ title }}</h1>
   </mat-toolbar>
 
@@ -15,10 +16,45 @@
       (closed)="events.push('close!')"
       fixedTopGap="56"
     >
-      <h1>Sidenav content</h1>
-      <mat-nav-list>
-        <div *ngFor="let e of events">{{ e }}</div>
-      </mat-nav-list>
+      <div class="slide-menu-container">
+        <section
+          class="menu-header"
+          [ngClass]="{ 'menu-header-dark': darkModeActive }"
+        >
+          <span class="greeting">BEM VINDO</span>
+          <div class="profile-container">
+            <img
+              src="https://api.adorable.io/avatars/100/rodrigo@arantes.png"
+              alt="profile-image"
+              class="profile-image"
+            />
+          </div>
+          <div class="account-details">
+            <span class="name">{{ userName }}</span>
+            <span class="email">{{ userEmail }}</span>
+          </div>
+        </section>
+        <section class="menu-body">
+          <mat-nav-list
+            class="menu-links"
+            [ngClass]="{ 'menu-links-dark': darkModeActive }"
+          >
+            <div
+              class="menu-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink=""
+              routerLinkActive="link-active"
+            >
+              Home
+            </div>
+            <div class="menu-link" *ngFor="let e of events">{{ e }}</div>
+            <div class="menu-link" (click)="logout()">Logout</div>
+          </mat-nav-list>
+        </section>
+        <section class="menu-footer">
+          <small class="copyright">Copyright © 2020 R1</small>
+        </section>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>

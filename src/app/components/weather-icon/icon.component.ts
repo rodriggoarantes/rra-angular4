@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from "@angular/core";
 @Component({
   selector: "weather-icon",
   template: `
-    <img [src]="icon" [width]="size" [height]="size" />
+    <img [src]="getIcon(state)" [width]="size" [height]="size" />
   `
 })
 export class WeatherIconComponent implements OnInit {
@@ -15,12 +15,9 @@ export class WeatherIconComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    const icon = this.getIcon();
-    this.icon = `${this.path}/${icon}`;
-  }
+  ngOnInit() {}
 
-  private getIcon() {
+  getIcon() {
     const state = this.state ? this.state.toUpperCase() : "";
     let answer = "";
     switch (state) {
@@ -47,6 +44,6 @@ export class WeatherIconComponent implements OnInit {
       default:
         answer = "exclamation-icon.svg";
     }
-    return answer;
+    return `${this.path}/${answer}`;
   }
 }
