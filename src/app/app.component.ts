@@ -9,6 +9,7 @@ export class AppComponent {
   title = "Sunshine";
   opened: boolean = false;
   events: string[] = [];
+  darkModeActive: boolean = false;
 
   userName: string = "Rodrigo Arantes";
   userEmail: string = "rodriggoarantes@gmail.com";

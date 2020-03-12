@@ -16,8 +16,7 @@
 }
 
 .card.dark {
-  background: linear-gradient(to bottom, #711b86, #00057a);
-  /* background: linear-gradient(to bottom, #372865, #000000); */
+  background: linear-gradient(to bottom, #372865, #000000);
   color: white;
 }
 
@@ -58,6 +57,10 @@
 .temp-arrow {
   height: 1.25rem;
   margin: auto;
+}
+
+.temp-arrow.max-arrow {
+  margin-bottom: -0.05rem;
 }
 
 .weather-condition {
