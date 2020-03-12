@@ -7,8 +7,8 @@
   justify-items: center;
   padding: 2rem;
   margin: 2rem;
-  width: 20rem;
-  height: 30rem;
+  width: 16rem;
+  height: 28rem;
   cursor: pointer;
   border-radius: 1.75rem;
   animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0ms 1;
