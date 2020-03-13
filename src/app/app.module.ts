@@ -8,11 +8,13 @@ import { MaterialModule } from "@components/material/app.module-material";
 import { WeatherIconComponent } from "./components/weather-icon/icon.component";
 import { CardComponent } from "@components/weather-card/card.component";
 
-import { HomeComponent } from "@app/pages/home/home.component";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AddCardComponent } from './components/add-card/add-card.component';
+import { AddCardComponent } from "./components/add-card/add-card.component";
+
+import { HomeComponent } from "@app/pages/home/home.component";
+import { CityAddComponent } from "@app/pages/city/add/city.add.component";
+import { ManageComponent } from "@app/pages/city/manage/manage.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AddCardComponent } from './components/add-card/add-card.component';
     CardComponent,
     HomeComponent,
     WeatherIconComponent,
-    AddCardComponent
+    AddCardComponent,
+    CityAddComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,
