@@ -1,3 +1,52 @@
 <div class="container">
-  <p>add works!</p>
+  <div class="add-wrapper">
+    <section class="main-card">
+      <div class="city-search-wrapper">
+        <div class="city-search-header">
+          <h3 class="city-search-title">SEARCH CITIES</h3>
+          <div class="search-city-input-wrapper">
+            <input class="search-city-input" placeholder="search city" #input />
+
+            <button class="search-city-btn">
+              <!-- search-icon -->
+            </button>
+          </div>
+          <span class="city-search-hr">O O O</span>
+        </div>
+
+        <div class="city-search-body">
+          <!-- APP WEATHER CARD  -->
+        </div>
+      </div>
+
+      <div class="fav-city-wrapper">
+        <img class="fav-city-image" />
+        <div class="fav-city-image-overlay"></div>
+
+        <div class="fav-city-header">
+          <h3 class="fav-city-title">CITY OF THE MONTH</h3>
+          <hr class="fav-city-hr" />
+          <span class="fav-city-date">Sunday, 31th July</span>
+        </div>
+
+        <div class="fav-city-body">
+          <div class="fav-city-body-subwrapper">
+            <div class="fav-weather-icon" [ngSwitch]="true"></div>
+
+            <div class="fav-city-info">
+              <span class="fav-city-temp">36°</span>
+              <div class="fav-city-name-wrapper">
+                <span class="fav-city-name">FAVORITA</span
+                ><span class="fav-city-country">IT</span>
+              </div>
+              <span class="fav-city-state">CLOUDS</span>
+            </div>
+            <button class="fav-city-add-btn">
+              {{ true ? "FOLLOWED" : "FOLLOW" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
