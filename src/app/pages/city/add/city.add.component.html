@@ -5,17 +5,42 @@
         <div class="city-search-header">
           <h3 class="city-search-title">SEARCH CITIES</h3>
           <div class="search-city-input-wrapper">
-            <input class="search-city-input" placeholder="search city" #input />
+            <form class="example-form">
+              <input
+                #input
+                class="search-city-input"
+                placeholder="Pesquisar"
+                type="text"
+                matInput
+                [formControl]="formControl"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                (optionSelected)="selectOption($event)"
+                [displayWith]="displayFn"
+              >
+                <mat-option
+                  *ngFor="let cidade of filteredCities | async"
+                  [value]="cidade"
+                >
+                  {{ cidade.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </form>
 
-            <button class="search-city-btn">
+            <button class="search-city-btn" (click)="pesquisarCidades()">
               <!-- search-icon -->
             </button>
           </div>
-          <span class="city-search-hr">O O O</span>
         </div>
 
         <div class="city-search-body">
           <!-- APP WEATHER CARD  -->
+          <city-card></city-card>
+          <city-card></city-card>
+          <city-card></city-card>
+          <city-card></city-card>
         </div>
       </div>
 

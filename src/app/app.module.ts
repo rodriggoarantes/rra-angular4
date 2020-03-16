@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -11,6 +11,7 @@ import { CardComponent } from "@components/weather-card/card.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { AddCardComponent } from "./components/add-card/add-card.component";
+import { CityCardComponent } from "./components/city-card/city.card.component";
 
 import { HomeComponent } from "@app/pages/home/home.component";
 import { CityAddComponent } from "@app/pages/city/add/city.add.component";
@@ -24,6 +25,7 @@ import { ManageComponent } from "@app/pages/city/manage/manage.component";
     WeatherIconComponent,
     AddCardComponent,
     CityAddComponent,
+    CityCardComponent,
     ManageComponent
   ],
   imports: [
@@ -32,6 +34,7 @@ import { ManageComponent } from "@app/pages/city/manage/manage.component";
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MaterialModule
   ],
   providers: [],

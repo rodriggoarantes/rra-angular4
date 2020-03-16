@@ -44,23 +44,17 @@
 
 .city-search-header {
   width: 100%;
-  min-height: 40%;
+  min-height: 30%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-flow: column;
 }
 
 .city-search-body {
   width: 100%;
-  min-height: 60%;
+  min-height: 70%;
   display: flex;
-  justify-content: center;
-}
-
-.city-search-hr {
-  word-spacing: 1rem;
-  margin: 2rem;
+  flex-direction: column;
 }
 
 .search-city-input-wrapper {
@@ -84,8 +78,8 @@
 
 .search-city-input::placeholder {
   font-size: 1rem;
-  color: #131f69;
-  text-transform: uppercase;
+  color: #a1a7d3;
+  text-transform: capitalize;
   letter-spacing: 0.1rem;
 }
 
