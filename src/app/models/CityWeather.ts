@@ -1,10 +1,13 @@
 import { City } from "./City";
 
 export interface CityWeather {
-  _id: string;
+  _id?: string;
   city: City;
   state: string;
   temp: number;
-  maxTemp: number;
-  minTemp: number;
+  max: number;
+  min: number;
+  pressure?: number;
+  humidity?: number;
+  dt?: Date;
 }

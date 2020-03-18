@@ -1,16 +1,9 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  Output,
-  EventEmitter
-} from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Subscription } from "rxjs";
-import { first } from "rxjs/operators";
 
+import { CityWeather } from "@app/models/CityWeather";
 import { UiService } from "@app/services/ui.service";
 import { WeatherService } from "@app/services/weather.service";
 
@@ -20,16 +13,15 @@ import { WeatherService } from "@app/services/weather.service";
   styleUrls: ["./card.component.css"]
 })
 export class CardComponent implements OnInit, OnDestroy {
-  @Input() city: string = "Paris";
-  @Output() cityStored = new EventEmitter();
+  @Input() city: string = "NqNfAojUrow6agBMREAu";
 
-  citesWeather: Object;
   darkMode: boolean;
+
+  cityName = "";
   state: string;
   temp: number;
   maxTemp: number;
   minTemp: number;
-  cityName = "";
 
   private themeSubs: Subscription;
 
@@ -60,46 +52,17 @@ export class CardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.weather
-      .getWeather(city)
-      .pipe(first())
-      .subscribe(
-        payload => {
-          this.cityName = city;
-          this.state = payload.weather[0].main;
-          this.temp = Math.ceil(payload.main.temp);
-        },
-        err => {
-          console.log(`ERRO: ${err.error.message}`);
-        }
-      );
-
-    this.weather
-      .getForecast(city)
-      .pipe(first())
-      .subscribe(
-        payload => {
-          this.maxTemp = Math.round(payload[0].main.temp);
-          this.minTemp = Math.round(payload[0].main.temp);
-          for (const res of payload) {
-            if (
-              new Date().toLocaleDateString("pt-BR") ===
-              new Date(res.dt_txt).toLocaleDateString("pt-BR")
-            ) {
-              this.maxTemp =
-                res.main.temp > this.maxTemp
-                  ? Math.round(res.main.temp)
-                  : this.maxTemp;
-              this.minTemp =
-                res.main.temp < this.minTemp
-                  ? Math.round(res.main.temp)
-                  : this.minTemp;
-            }
-          }
-        },
-        err => {
-          console.log(`ERRO: ${err.error.message}`);
-        }
-      );
+    this.weather.getWeather(city).subscribe(
+      (payload: CityWeather) => {
+        this.cityName = payload.city.name;
+        this.state = payload.state;
+        this.temp = Math.ceil(payload.temp);
+        this.maxTemp = Math.ceil(payload.max);
+        this.minTemp = Math.ceil(payload.min);
+      },
+      err => {
+        console.log(`ERRO: ${err.error.message}`);
+      }
+    );
   }
 }

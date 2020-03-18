@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appID: "1b3d53826f77dcbaa65c944093deb388"
+  baseUrl: "http://localhost:3333"
 };
 
 /*

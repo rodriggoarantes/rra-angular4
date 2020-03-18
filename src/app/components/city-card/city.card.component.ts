@@ -9,7 +9,6 @@ import {
 import { Router } from "@angular/router";
 
 import { Subscription } from "rxjs";
-import { first } from "rxjs/operators";
 
 import { UiService } from "@app/services/ui.service";
 
@@ -39,8 +38,8 @@ export class CityCardComponent implements OnInit, OnDestroy {
     this.weather = <CityWeather>{
       _id: "123124564",
       city: <City>{ _id: "789", name: "Paris" },
-      maxTemp: 50,
-      minTemp: -10,
+      max: 50,
+      min: -10,
       state: "Clear",
       temp: 31
     };
