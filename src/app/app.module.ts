@@ -13,20 +13,26 @@ import { AppComponent } from "./app.component";
 import { AddCardComponent } from "./components/add-card/add-card.component";
 import { CityCardComponent } from "./components/city-card/city.card.component";
 
+import { MainLayoutComponent } from "@app/pages/layouts/main/main.layout.component";
 import { HomeComponent } from "@app/pages/home/home.component";
 import { CityAddComponent } from "@app/pages/city/add/city.add.component";
 import { ManageComponent } from "@app/pages/city/manage/manage.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { SignupComponent } from "./pages/signup/signup.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainLayoutComponent,
     CardComponent,
     HomeComponent,
     WeatherIconComponent,
     AddCardComponent,
     CityAddComponent,
     CityCardComponent,
-    ManageComponent
+    ManageComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

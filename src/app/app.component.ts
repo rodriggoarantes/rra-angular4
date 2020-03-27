@@ -2,17 +2,6 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.css", "./sidemenu.css"]
+  template: "<router-outlet></router-outlet>"
 })
-export class AppComponent {
-  title = "Sunshine";
-  opened: boolean = false;
-  events: string[] = [];
-  darkModeActive: boolean = false;
-
-  userName: string = "Rodrigo Arantes";
-  userEmail: string = "rodriggoarantes@gmail.com";
-
-  logout() {}
-}
+export class AppComponent {}
