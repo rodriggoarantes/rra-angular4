@@ -19,9 +19,9 @@ import { UiService } from "@app/services/ui.service";
   styleUrls: ["./add-card.component.css"]
 })
 export class AddCardComponent implements OnInit, OnDestroy {
-  protected addImage: string = "assets/plus-icon.svg";
-  protected cityImage: string = "";
-  protected darkMode: boolean;
+  addImage: string = "assets/plus-icon.svg";
+  cityImage: string = "";
+  darkMode: boolean;
 
   private themeSubs: Subscription;
 

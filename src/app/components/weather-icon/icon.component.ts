@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from "@angular/core";
 @Component({
   selector: "weather-icon",
   template: `
-    <img [src]="getIcon(state)" [width]="size" [height]="size" />
+    <img [src]="getIcon()" [width]="size" [height]="size" />
   `
 })
 export class WeatherIconComponent implements OnInit {

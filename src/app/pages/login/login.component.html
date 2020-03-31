@@ -4,7 +4,7 @@
       <span class="login-header">Login</span>
       <!-- login form -->
 
-      <form class="login-form" (ngSubmit)="login($event)" #authform="ngForm">
+      <form class="login-form" #authform="ngForm" (ngSubmit)="login(authform)">
         <input
           ngModel
           type="email"
@@ -20,7 +20,7 @@
           placeholder="Password"
           name="password"
           class="login-input"
-          minlength="6"
+          minlength="3"
           required
         />
         <input

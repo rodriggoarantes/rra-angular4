@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -19,6 +19,9 @@ import { CityAddComponent } from "@app/pages/city/add/city.add.component";
 import { ManageComponent } from "@app/pages/city/manage/manage.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { SignupComponent } from "./pages/signup/signup.component";
+
+import { AuthErrorInterceptor } from "./interceptors/auth.error.interceptor";
+import { TokenInterceptor } from "./interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { SignupComponent } from "./pages/signup/signup.component";
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
