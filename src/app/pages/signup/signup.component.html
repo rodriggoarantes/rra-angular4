@@ -1,49 +1,25 @@
 <!-- login form -->
 <div class="container">
-  <form class="form" (ngSubmit)="signup($event)" #authform="ngForm">
-    <input
-      ngModel
-      type="text"
-      autofocus
-      placeholder="Nome"
-      name="email"
-      class="input"
-      required
-    />
-    <input
-      ngModel
-      type="email"
-      autofocus
-      placeholder="Email"
-      name="email"
-      class="input"
-      required
-    />
+  <form class="form" #signupform="ngForm" (ngSubmit)="signup(signupform)">
+    <input ngModel type="text" autofocus placeholder="Nome" name="name" class="input" required />
+    <input ngModel type="email" autofocus placeholder="Email" name="email" class="input" required />
+    <input ngModel type="password" placeholder="Senha" name="password" class="input" minlength="3" required />
     <input
       ngModel
       type="password"
-      placeholder="Password"
-      name="password"
-      class="input"
-      minlength="6"
-      required
-    />
-    <input
-      ngModel
-      type="password"
-      placeholder="Confirm Password"
+      placeholder="Confirmar Senha"
       name="confirmPass"
       class="input"
-      minlength="6"
+      minlength="3"
       required
     />
     <input
       type="submit"
       name="submit"
-      value="Signup"
+      value="Cadastrar"
       class="btn"
-      [class.btn-disabled]="!authform.form.valid"
-      [disabled]="!authform.form.valid"
+      [class.btn-disabled]="!signupform.form.valid"
+      [disabled]="!signupform.form.valid"
     />
   </form>
 </div>

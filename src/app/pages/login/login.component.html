@@ -2,11 +2,11 @@
 <div class="container">
   <form class="form" #authform="ngForm" (ngSubmit)="login(authform)">
     <input ngModel type="email" autofocus placeholder="Email" name="email" class="input" required />
-    <input ngModel type="password" placeholder="Password" name="password" class="input" minlength="3" required />
+    <input ngModel type="password" placeholder="Senha" name="password" class="input" minlength="3" required />
     <input
       type="submit"
       name="submit"
-      value="Login"
+      value="Entrar"
       class="btn"
       [class.btn-disabled]="!authform.form.valid"
       [disabled]="!authform.form.valid"

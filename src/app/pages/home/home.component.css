@@ -3,7 +3,10 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  min-height: 90vh;
+
+  height: auto !important;
+  min-height: calc(100vh - 64px);
+  height: 100%;
   position: relative;
 
   background-image: linear-gradient(to top, #5ee7df 0%, #66a6ff 100%);
