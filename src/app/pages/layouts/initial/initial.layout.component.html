@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="card">
+    <main class="content">
+      <span class="header">{{ config.title }}</span>
+      <!-- SubRoute -->
+      <div class="subroute">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- /SubRoute -->
+      <div class="link-wrapper">
+        <span class="notice">{{ config.notice }}</span>
+        <a class="link" [routerLink]="config.routeUrl">{{ config.routeName }}</a>
+      </div>
+    </main>
+
+    <!-- linking to signup -->
+    <aside class="aside">
+      <div class="aside-overlay"></div>
+      <h1 class="welcome-text">Bem vindo ao Sunshine!</h1>
+      <hr class="aside-hr" />
+    </aside>
+  </div>
+</div>

@@ -1,32 +1,35 @@
-import { NgModule } from "@angular/core";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from "@components/material/app.module-material";
-import { WeatherIconComponent } from "./components/weather-icon/icon.component";
-import { CardComponent } from "@components/weather-card/card.component";
+import { MaterialModule } from '@components/material/app.module-material';
+import { WeatherIconComponent } from './components/weather-icon/icon.component';
+import { CardComponent } from '@components/weather-card/card.component';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { AddCardComponent } from "./components/add-card/add-card.component";
-import { CityCardComponent } from "./components/city-card/city.card.component";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AddCardComponent } from './components/add-card/add-card.component';
+import { CityCardComponent } from './components/city-card/city.card.component';
 
-import { MainLayoutComponent } from "@app/pages/layouts/main/main.layout.component";
-import { HomeComponent } from "@app/pages/home/home.component";
-import { CityAddComponent } from "@app/pages/city/add/city.add.component";
-import { ManageComponent } from "@app/pages/city/manage/manage.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { SignupComponent } from "./pages/signup/signup.component";
+import { MainLayoutComponent } from '@app/pages/layouts/main/main.layout.component';
+import { InitialLayoutComponent } from '@app/pages/layouts/initial/initial.layout.component';
 
-import { AuthErrorInterceptor } from "./interceptors/auth.error.interceptor";
-import { TokenInterceptor } from "./interceptors/token.interceptor";
+import { HomeComponent } from '@app/pages/home/home.component';
+import { CityAddComponent } from '@app/pages/city/add/city.add.component';
+import { ManageComponent } from '@app/pages/city/manage/manage.component';
+import { LoginComponent } from '@app/pages/login/login.component';
+import { SignupComponent } from '@app/pages/signup/signup.component';
+
+import { AuthErrorInterceptor } from './interceptors/auth.error.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
+    InitialLayoutComponent,
     CardComponent,
     HomeComponent,
     WeatherIconComponent,
@@ -35,7 +38,7 @@ import { TokenInterceptor } from "./interceptors/token.interceptor";
     CityCardComponent,
     ManageComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,12 +47,12 @@ import { TokenInterceptor } from "./interceptors/token.interceptor";
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

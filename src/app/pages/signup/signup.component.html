@@ -1,63 +1,49 @@
-<div class="main__container">
-  <div class="signup-card">
-    <main class="signup-content">
-      <span class="signup-header">Cadastrar</span>
-      <form class="signup-form" (ngSubmit)="signup($event)" #authform="ngForm">
-        <input
-          ngModel
-          type="text"
-          autofocus
-          placeholder="Nome"
-          name="email"
-          class="signup-input"
-          required
-        />
-        <input
-          ngModel
-          type="email"
-          autofocus
-          placeholder="Email"
-          name="email"
-          class="signup-input"
-          required
-        />
-        <input
-          ngModel
-          type="password"
-          placeholder="Password"
-          name="password"
-          class="signup-input"
-          minlength="6"
-          required
-        />
-        <input
-          ngModel
-          type="password"
-          placeholder="Confirm Password"
-          name="confirmPass"
-          class="signup-input"
-          minlength="6"
-          required
-        />
-        <input
-          type="submit"
-          name="submit"
-          value="Signup"
-          class="signup-btn"
-          [class.btn-disabled]="!authform.form.valid"
-          [disabled]="!authform.form.valid"
-        />
-      </form>
-      <div class="login-link-wrapper">
-        <span class="login-notice">Já possui uma conta?</span>
-        <a class="login-link" routerLink="/login">login</a>
-      </div>
-    </main>
-
-    <aside class="signup-aside">
-      <div class="signup-aside-overlay"></div>
-      <h1 class="signup-welcome-text">Bem vindo ao Sunshine!</h1>
-      <hr class="signup-aside-hr" />
-    </aside>
-  </div>
+<!-- login form -->
+<div class="container">
+  <form class="form" (ngSubmit)="signup($event)" #authform="ngForm">
+    <input
+      ngModel
+      type="text"
+      autofocus
+      placeholder="Nome"
+      name="email"
+      class="input"
+      required
+    />
+    <input
+      ngModel
+      type="email"
+      autofocus
+      placeholder="Email"
+      name="email"
+      class="input"
+      required
+    />
+    <input
+      ngModel
+      type="password"
+      placeholder="Password"
+      name="password"
+      class="input"
+      minlength="6"
+      required
+    />
+    <input
+      ngModel
+      type="password"
+      placeholder="Confirm Password"
+      name="confirmPass"
+      class="input"
+      minlength="6"
+      required
+    />
+    <input
+      type="submit"
+      name="submit"
+      value="Signup"
+      class="btn"
+      [class.btn-disabled]="!authform.form.valid"
+      [disabled]="!authform.form.valid"
+    />
+  </form>
 </div>
