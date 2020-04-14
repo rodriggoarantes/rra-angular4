@@ -20,10 +20,7 @@
                 (optionSelected)="selectOption($event)"
                 [displayWith]="displayFn"
               >
-                <mat-option
-                  *ngFor="let cidade of filteredCities | async"
-                  [value]="cidade"
-                >
+                <mat-option *ngFor="let cidade of filteredCities | async" [value]="cidade">
                   {{ cidade.name }}
                 </mat-option>
               </mat-autocomplete>
@@ -37,37 +34,38 @@
 
         <div class="city-search-body">
           <!-- APP WEATHER CARD  -->
-          <city-card></city-card>
-          <city-card></city-card>
-          <city-card></city-card>
-          <city-card></city-card>
+          <app-city-card></app-city-card>
+          <app-city-card></app-city-card>
+          <app-city-card></app-city-card>
         </div>
       </div>
 
       <div class="fav-city-wrapper">
-        <img class="fav-city-image" />
+        <img class="fav-city-image" [src]="suggested.city_picture.regular" />
         <div class="fav-city-image-overlay"></div>
 
         <div class="fav-city-header">
-          <h3 class="fav-city-title">CITY OF THE MONTH</h3>
+          <h3 class="fav-city-title">Cidade do Mês</h3>
           <hr class="fav-city-hr" />
           <span class="fav-city-date">Sunday, 31th July</span>
         </div>
 
         <div class="fav-city-body">
           <div class="fav-city-body-subwrapper">
-            <div class="fav-weather-icon" [ngSwitch]="true"></div>
+            <div class="fav-weather-icon">
+              <app-weather-icon [state]="suggested.state"></app-weather-icon>
+            </div>
 
             <div class="fav-city-info">
-              <span class="fav-city-temp">36°</span>
+              <span class="fav-city-temp">{{ suggested.temp }}</span>
               <div class="fav-city-name-wrapper">
-                <span class="fav-city-name">FAVORITA</span
-                ><span class="fav-city-country">IT</span>
+                <span class="fav-city-name">{{ suggested.city.name }}</span
+                ><span class="fav-city-country">{{ suggested.city.country }}</span>
               </div>
-              <span class="fav-city-state">CLOUDS</span>
+              <span class="fav-city-state">{{ suggested.state }}</span>
             </div>
-            <button class="fav-city-add-btn">
-              {{ true ? "FOLLOWED" : "FOLLOW" }}
+            <button class="fav-city-add-btn" *ngIf="true">
+              Adicionar Cidade
             </button>
           </div>
         </div>

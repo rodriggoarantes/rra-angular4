@@ -1,23 +1,23 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Subscription } from "rxjs";
+import { Subscription } from 'rxjs';
 
-import { CityWeather } from "@app/models/CityWeather";
-import { UiService } from "@app/services/ui.service";
-import { WeatherService } from "@app/services/weather.service";
+import { CityWeather } from '@app/models/CityWeather';
+import { UiService } from '@app/services/ui.service';
+import { WeatherService } from '@app/services/weather.service';
 
 @Component({
-  selector: "weather-card",
-  templateUrl: "./card.component.html",
-  styleUrls: ["./card.component.css"]
+  selector: 'app-weather-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit, OnDestroy {
-  @Input() city: string = "NqNfAojUrow6agBMREAu";
+  @Input() city = 'NqNfAojUrow6agBMREAu';
 
   darkMode: boolean;
 
-  cityName = "";
+  cityName = '';
   state: string;
   temp: number;
   maxTemp: number;
@@ -25,14 +25,10 @@ export class CardComponent implements OnInit, OnDestroy {
 
   private themeSubs: Subscription;
 
-  constructor(
-    public router: Router,
-    public uiService: UiService,
-    public weather: WeatherService
-  ) {}
+  constructor(public router: Router, public uiService: UiService, public weather: WeatherService) {}
 
   ngOnInit() {
-    this.themeSubs = this.uiService.darkModeState.subscribe(isDark => {
+    this.themeSubs = this.uiService.darkModeState.subscribe((isDark) => {
       this.darkMode = isDark;
     });
 
@@ -52,7 +48,7 @@ export class CardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.weather.getWeather(city).subscribe(
+    this.weather.find(city).subscribe(
       (payload: CityWeather) => {
         this.cityName = payload.city.name;
         this.state = payload.state;
@@ -60,7 +56,7 @@ export class CardComponent implements OnInit, OnDestroy {
         this.maxTemp = Math.ceil(payload.max);
         this.minTemp = Math.ceil(payload.min);
       },
-      err => {
+      (err) => {
         console.log(`ERRO: ${err.error.message}`);
       }
     );

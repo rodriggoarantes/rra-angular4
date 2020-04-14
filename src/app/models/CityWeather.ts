@@ -1,4 +1,4 @@
-import { City } from "./City";
+import { City } from './City';
 
 export interface CityWeather {
   _id?: string;
@@ -10,4 +10,5 @@ export interface CityWeather {
   pressure?: number;
   humidity?: number;
   dt?: Date;
+  city_picture?: any;
 }

@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+
+  height: auto !important;
+  min-height: calc(100vh - 64px - 20px); /* 64px bar - padding-top */
+  position: relative;
+
+  background-image: linear-gradient(to top, #66bbaa 0%, #8867df 100%);
+}

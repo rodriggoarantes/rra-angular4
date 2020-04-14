@@ -3,7 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 94vh;
+  padding-top: 20px;
+
+  height: auto !important;
+  min-height: calc(100vh - 64px - 20px); /* 64px bar - padding-top */
+  position: relative;
+
   background-image: linear-gradient(to top, #6667df 0%, #66a6aa 100%);
 }
 
@@ -76,7 +81,7 @@
   border-radius: 3rem;
   outline: none;
   border: none;
-  box-shadow: 0 0 2rem 0.15rem rgba(0, 0, 255, 0.1);
+  box-shadow: 0 0 2rem 0.15rem rgba(255, 100, 0, 0.1);
   font-size: 1rem;
   color: #131f69;
   text-transform: uppercase;
@@ -92,7 +97,7 @@
 .search-city-btn {
   cursor: pointer;
   position: absolute;
-  background-color: #31feae;
+  background-color: #ff9c4a;
   height: 5rem;
   width: 5rem;
   border-radius: 50%;
@@ -101,7 +106,7 @@
   outline: none;
   border: none;
   z-index: 5;
-  box-shadow: 0 0 2rem 0.15rem rgba(0, 0, 255, 0.1);
+  box-shadow: 0 0 2rem 0.15rem rgba(255, 100, 0, 0.3);
 }
 
 .search-icon {
@@ -124,14 +129,17 @@
   right: 0;
   bottom: 0;
   border-radius: 0 1rem 1rem 0;
+  width: 100%;
   height: 100%;
+  background-size: cover;
+  background: no-repeat 50% 50%;
 }
 
 .fav-city-image-overlay {
   min-height: 100%;
   width: 100%;
   position: absolute;
-  background: rgba(43, 36, 77, 0.5);
+  background: rgba(43, 36, 77, 0.6);
   border-radius: 0 1rem 1rem 0;
 }
 
@@ -149,6 +157,7 @@
   display: flex;
   flex-flow: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .fav-city-hr {
@@ -169,7 +178,7 @@
 
 .city-search-title {
   color: #0c1066;
-  margin: 4rem 0 3rem 0;
+  margin: 4rem 0 2rem 0;
 }
 
 .fav-city-date {
@@ -187,7 +196,7 @@
 }
 
 .fav-weather-icon {
-  width: 7rem;
+  width: 9rem;
   margin-bottom: 4rem;
 }
 
@@ -287,10 +296,5 @@ app-weather-card {
   .fav-city-image,
   .fav-city-image-overlay {
     border-radius: 0 0 1rem 1rem;
-  }
-
-  .fav-city-image {
-    background-size: cover;
-    background: no-repeat 50% 50%;
   }
 }
