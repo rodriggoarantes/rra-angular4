@@ -3,10 +3,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 1vh;
 
   height: auto !important;
-  min-height: calc(100vh - 64px - 20px); /* 64px bar - padding-top */
+  min-height: calc(99vh - 64px); /* 64px bar */
   position: relative;
 
   background-image: linear-gradient(to top, #6667df 0%, #66a6aa 100%);
@@ -17,7 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
 }
 
 .main-card {
@@ -26,7 +25,6 @@
   background-color: #fff;
   border-radius: 1rem;
   display: flex;
-  margin-top: -4rem;
 }
 
 .city-search-wrapper::-webkit-scrollbar-track {
@@ -55,15 +53,14 @@
 
 .city-search-header {
   width: 100%;
-  min-height: 30%;
   display: flex;
   align-items: center;
   flex-flow: column;
+  padding-bottom: 16px;
 }
 
 .city-search-body {
   width: 100%;
-  min-height: 70%;
   display: flex;
   flex-direction: column;
 }
@@ -186,12 +183,12 @@
 }
 
 .fav-city-temp {
-  font-size: 5rem;
+  font-size: 3rem;
   text-align: center;
 }
 
 .fav-city-name {
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: 0.1rem;
 }
 
@@ -215,7 +212,7 @@
 }
 
 .fav-city-country {
-  margin-left: 0.75rem;
+  margin-left: 0.7rem;
 }
 
 .fav-city-name-wrapper {
@@ -241,60 +238,4 @@
 .fav-city-added-btn {
   border: none;
   background-color: rgba(255, 255, 255, 0.6);
-}
-
-app-weather-card {
-  margin: 2rem 0;
-  min-width: 28rem;
-}
-
-/* Media Query:   LT-XL  */
-@media screen and (max-width: 1919px) {
-  .add-city-btn {
-    height: 80%;
-    width: 75%;
-  }
-}
-
-/* Media Query:   LT-MD   */
-@media screen and (max-width: 959px) {
-  app-weather-card {
-    width: 90%;
-    margin-bottom: 2rem;
-  }
-
-  .fav-city-wrapper {
-    height: auto;
-  }
-
-  .add-wrapper {
-    flex-flow: column;
-  }
-
-  .main-card {
-    flex-flow: column;
-    margin-left: -1rem;
-    margin-bottom: 2rem;
-    height: auto;
-  }
-
-  .city-search-title {
-    margin: 2rem;
-  }
-
-  .fav-city-wrapper,
-  .city-search-wrapper,
-  .city-search-header,
-  .city-search-body,
-  .fav-city-header,
-  .fav-city-body,
-  .fav-city-body {
-    width: 100%;
-  }
-
-  .fav-city-wrapper,
-  .fav-city-image,
-  .fav-city-image-overlay {
-    border-radius: 0 0 1rem 1rem;
-  }
 }
