@@ -9,7 +9,7 @@
               <input
                 #input
                 class="search-city-input"
-                placeholder="Pesquisar"
+                placeholder="Busca uma cidade pelo seu nome"
                 type="text"
                 matInput
                 [formControl]="formControl"
@@ -26,49 +26,64 @@
               </mat-autocomplete>
             </form>
 
-            <button class="search-city-btn" (click)="pesquisarCidades()">
-              <img class="search-icon icon" src="assets/search-icon.svg" />
-            </button>
+            <ng-container *ngIf="stateCityWeather | async as state">
+              <ng-container *ngIf="state.weather">
+                <button class="search-city-btn" (click)="clearOption()">
+                  <img class="search-icon icon" src="assets/exclamation-icon.svg" />
+                </button>
+              </ng-container>
+            </ng-container>
+
           </div>
         </div>
 
         <div class="city-search-body">
-          <!-- APP WEATHER CARD  -->
-          <app-city-card></app-city-card>
-          <app-city-card></app-city-card>
-          <app-city-card></app-city-card>
+          <ng-container *ngIf="stateCityWeather | async as state">
+            <ng-container *ngIf="state.weather as weather">
+              <app-city-card [weather]="weather"></app-city-card>
+            </ng-container>
+            <ng-container *ngIf="state.loading">
+              <div>Loading...</div>
+            </ng-container>
+          </ng-container>
         </div>
       </div>
 
       <div class="fav-city-wrapper">
-        <img class="fav-city-image" [src]="state.suggested.city_picture.regular" />
-        <div class="fav-city-image-overlay"></div>
+        <ng-container *ngIf="state$ | async as state">
+          <ng-container *ngIf="state.suggested as suggested">
+            <ng-container *ngIf="suggested.city_picture as picture">
+              <img class="fav-city-image" [src]="picture.regular" />
+            </ng-container>
+            <div class="fav-city-image-overlay"></div>
 
-        <div class="fav-city-header">
-          <h3 class="fav-city-title">Cidade do Mês</h3>
-          <hr class="fav-city-hr" />
-          <span class="fav-city-date">Sunday, 31th July</span>
-        </div>
-
-        <div class="fav-city-body">
-          <div class="fav-city-body-subwrapper">
-            <div class="fav-weather-icon">
-              <app-weather-icon [state]="state.suggested.state"></app-weather-icon>
+            <div class="fav-city-header">
+              <h3 class="fav-city-title">Cidade do Mês</h3>
+              <hr class="fav-city-hr" />
+              <span class="fav-city-date">Sunday, 31th July</span>
             </div>
 
-            <div class="fav-city-info">
-              <span class="fav-city-temp">{{ state.suggested.temp }}</span>
-              <div class="fav-city-name-wrapper">
-                <span class="fav-city-name">{{ state.suggested.city.name }}</span
-                ><span class="fav-city-country">{{ state.suggested.city.country }}</span>
+            <div class="fav-city-body">
+              <div class="fav-city-body-subwrapper">
+                <div class="fav-weather-icon">
+                  <app-weather-icon [state]="suggested.state"></app-weather-icon>
+                </div>
+
+                <div class="fav-city-info">
+                  <span class="fav-city-temp">{{ suggested.temp }}</span>
+                  <div class="fav-city-name-wrapper">
+                    <span class="fav-city-name">{{ suggested.city.name }}</span
+                    ><span class="fav-city-country">{{ suggested.city.country }}</span>
+                  </div>
+                  <span class="fav-city-state">{{ suggested.state }}</span>
+                </div>
+                <button class="fav-city-add-btn" *ngIf="true">
+                  Adicionar Cidade
+                </button>
               </div>
-              <span class="fav-city-state">{{ state.suggested.state }}</span>
             </div>
-            <button class="fav-city-add-btn" *ngIf="true">
-              Adicionar Cidade
-            </button>
-          </div>
-        </div>
+          </ng-container>
+        </ng-container>
       </div>
     </section>
   </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { WeatherService } from '@app/services/weather.service';
@@ -12,8 +12,12 @@ import { StatefulComponent } from '@app/core/StatefulComponent';
 
 interface State {
   city: City;
-  cities: Array<City>;
   suggested: CityWeather;
+}
+
+interface StateWeather {
+  loading: boolean;
+  weather: CityWeather;
 }
 
 @Component({
@@ -24,12 +28,13 @@ interface State {
 export class CityAddComponent extends StatefulComponent<State> implements OnInit, OnDestroy {
   formControl = new FormControl();
   filteredCities: Observable<Array<City>>;
+  stateCityWeather: Subject<StateWeather> = new Subject();
 
   private suggestedSubscription: Subscription;
 
   constructor(private cityService: CityService, private weatherService: WeatherService) {
     super();
-    this.setState(<State>{ city: <City>{}, suggested: <CityWeather>{}, cities: [] });
+    this.setState(<State>{ city: null, suggested: null });
   }
 
   ngOnInit() {
@@ -51,21 +56,20 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
     if (event && event.option) {
       const cidade: City = event.option.value;
       console.log(`Selecionada: ${JSON.stringify(cidade)}`);
+
+      // TODO acrescentar um loading ao selecionar uma cidade
+      this.stateCityWeather.next(<StateWeather>{ loading: true });
+
+      // TODO pesquisar o CityWeather da cidae escolhida
+      this.weatherService.find(cidade._id).subscribe((cityWeather) => {
+        this.stateCityWeather.next(<StateWeather>{ loading: false, weather: cityWeather });
+      });
     }
   }
 
-  searchValidString(): boolean {
-    const searchValue = this.formControl.value;
-    return searchValue && typeof searchValue === 'string' && searchValue.length > 0;
-  }
-
-  pesquisarCidades() {
-    if (!this.searchValidString()) {
-      return;
-    }
-
-    const searchValue = this.formControl.value;
-    console.log('pesquisar cidades: ' + searchValue);
+  clearOption() {
+    this.formControl.setValue('');
+    this.stateCityWeather.next(<StateWeather>{ loading: false, weather: null });
   }
 
   private _findSuggested() {

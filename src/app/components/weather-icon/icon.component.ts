@@ -37,6 +37,7 @@ export class WeatherIconComponent implements OnInit {
         break;
       case 'HAZE':
       case 'FOG':
+      case 'SMOKE':
         answer = 'fog-icon.svg';
         break;
       default:
