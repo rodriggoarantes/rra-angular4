@@ -4,8 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
 
-import { MainLayoutComponent } from './pages/layouts/main/main.layout.component';
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
+import { MainLayoutComponent } from './pages/layouts/main/main.layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { CityAddComponent } from './pages/city/add/city.add.component';
@@ -68,6 +70,20 @@ const routes: Routes = [
         component: ManageComponent,
       },
     ],
+  },
+  {
+    path: 'error',
+    component: GlobalErrorComponent,
+    data: {
+      title: 'Error',
+    },
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: {
+      title: 'Not found',
+    },
   },
   {
     path: '**',
