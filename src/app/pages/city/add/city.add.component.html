@@ -41,7 +41,7 @@
       </div>
 
       <div class="fav-city-wrapper">
-        <img class="fav-city-image" [src]="suggested.city_picture.regular" />
+        <img class="fav-city-image" [src]="state.suggested.city_picture.regular" />
         <div class="fav-city-image-overlay"></div>
 
         <div class="fav-city-header">
@@ -53,16 +53,16 @@
         <div class="fav-city-body">
           <div class="fav-city-body-subwrapper">
             <div class="fav-weather-icon">
-              <app-weather-icon [state]="suggested.state"></app-weather-icon>
+              <app-weather-icon [state]="state.suggested.state"></app-weather-icon>
             </div>
 
             <div class="fav-city-info">
-              <span class="fav-city-temp">{{ suggested.temp }}</span>
+              <span class="fav-city-temp">{{ state.suggested.temp }}</span>
               <div class="fav-city-name-wrapper">
-                <span class="fav-city-name">{{ suggested.city.name }}</span
-                ><span class="fav-city-country">{{ suggested.city.country }}</span>
+                <span class="fav-city-name">{{ state.suggested.city.name }}</span
+                ><span class="fav-city-country">{{ state.suggested.city.country }}</span>
               </div>
-              <span class="fav-city-state">{{ suggested.state }}</span>
+              <span class="fav-city-state">{{ state.suggested.state }}</span>
             </div>
             <button class="fav-city-add-btn" *ngIf="true">
               Adicionar Cidade

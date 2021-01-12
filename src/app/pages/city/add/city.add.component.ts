@@ -8,21 +8,29 @@ import { CityService } from '@app/services/city.service';
 
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
+import { StatefulComponent } from '@app/core/StatefulComponent';
+
+interface State {
+  city: City;
+  cities: Array<City>;
+  suggested: CityWeather;
+}
 
 @Component({
   selector: 'app-city-add',
   templateUrl: './city.add.component.html',
   styleUrls: ['./city.add.component.css'],
 })
-export class CityAddComponent implements OnInit, OnDestroy {
+export class CityAddComponent extends StatefulComponent<State> implements OnInit, OnDestroy {
   formControl = new FormControl();
-  city: City = <City>{};
   filteredCities: Observable<Array<City>>;
-  suggested: CityWeather = <CityWeather>{};
 
   private suggestedSubscription: Subscription;
 
-  constructor(private cityService: CityService, private weatherService: WeatherService) {}
+  constructor(private cityService: CityService, private weatherService: WeatherService) {
+    super();
+    this.setState(<State>{ city: <City>{}, suggested: <CityWeather>{}, cities: [] });
+  }
 
   ngOnInit() {
     this._findSuggested();
@@ -61,7 +69,7 @@ export class CityAddComponent implements OnInit, OnDestroy {
   }
 
   private _findSuggested() {
-    this.suggestedSubscription = this.weatherService.suggested().subscribe((item) => (this.suggested = item));
+    this.suggestedSubscription = this.weatherService.suggested().subscribe((item) => (this.state.suggested = item));
   }
 
   private _filter(value: any) {
