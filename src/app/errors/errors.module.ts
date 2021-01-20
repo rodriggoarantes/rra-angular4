@@ -5,21 +5,16 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GlobalErrorHandler } from './global-error-handler/global-error-handler';
 import { GlobalErrorComponent } from './global-error/global-error.component';
+import { ContainerLayoutComponent } from './container/container.layoutcomponent';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  declarations: [
-    NotFoundComponent,
-    GlobalErrorComponent
-  ],
+  imports: [CommonModule, RouterModule],
+  declarations: [ContainerLayoutComponent, NotFoundComponent, GlobalErrorComponent],
   providers: [
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    }
-  ]
+      useClass: GlobalErrorHandler,
+    },
+  ],
 })
-export class ErrorsModule { }
+export class ErrorsModule {}

@@ -17,7 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { InitialData } from './models/InitialData';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/sunshine', pathMatch: 'full' },
   {
     path: 'login',
     component: InitialLayoutComponent,
@@ -87,7 +87,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: LoginComponent,
+    redirectTo: 'not-found',
   },
 ];
 
