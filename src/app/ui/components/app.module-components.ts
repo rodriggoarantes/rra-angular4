@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { MaterialModule } from '@app/ui/material/app.module-material';
 
 import { WeatherIconComponent } from './weather-icon/icon.component';

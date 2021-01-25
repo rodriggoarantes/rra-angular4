@@ -4,90 +4,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 
 import { MainLayoutComponent } from '@app/ui/layouts/main/main.layout.component';
-import { InitialLayoutComponent } from '@app/ui/layouts/initial/initial.layout.component';
-
-import { GlobalErrorComponent } from '@pages/errors/global-error/global-error.component';
-import { NotFoundComponent } from '@pages/errors/not-found/not-found.component';
-import { HomeComponent } from '@pages/home/home.component';
-import { SignupComponent } from '@pages/signup/signup.component';
-import { CityAddComponent } from '@pages/city/add/city.add.component';
-import { ManageComponent } from '@pages/city/manage/manage.component';
-import { LoginComponent } from '@pages/login/login.component';
-
-import { InitialData } from './models/InitialData';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sunshine', pathMatch: 'full' },
   {
-    path: 'login',
-    component: InitialLayoutComponent,
-    data: <InitialData>{
-      title: 'Login',
-      notice: 'Não possui uma conta?',
-      routeUrl: '/signup',
-      routeName: 'CADASTRAR',
-    },
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        component: LoginComponent,
-      },
-    ],
-  },
-  {
-    path: 'signup',
-    component: InitialLayoutComponent,
-    data: <InitialData>{
-      title: 'Cadastrar',
-      notice: 'Já possui uma conta?',
-      routeUrl: '/login',
-      routeName: 'LOGIN',
-    },
-    children: [
-      {
-        path: '',
-        component: SignupComponent,
-      },
-    ],
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthPagesModule),
   },
   {
     path: 'sunshine',
     component: MainLayoutComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        component: HomeComponent,
-      },
-      {
-        path: 'add',
-        component: CityAddComponent,
-      },
-      {
-        path: 'manage',
-        component: ManageComponent,
-      },
-    ],
+    loadChildren: () => import('./pages/sunshine/sunshine.module').then((m) => m.SunshineModule),
   },
   {
-    path: 'error',
-    component: GlobalErrorComponent,
-    data: {
-      title: 'Error',
-    },
-  },
-  {
-    path: 'not-found',
-    component: NotFoundComponent,
-    data: {
-      title: 'Not found',
-    },
+    path: 'errors',
+    loadChildren: () => import('./pages/errors/errors.module').then((m) => m.ErrosPagesModule),
   },
   {
     path: '**',
-    redirectTo: 'not-found',
+    redirectTo: 'errors/not-found',
   },
 ];
 

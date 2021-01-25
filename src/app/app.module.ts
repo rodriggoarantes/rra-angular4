@@ -13,7 +13,7 @@ import { GlobalErrorHandler } from './core/global-error-handler/global-error-han
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
