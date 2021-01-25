@@ -1,58 +1,23 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MaterialModule } from '@components/material/app.module-material';
-import { WeatherIconComponent } from './components/weather-icon/icon.component';
-import { CardComponent } from '@components/weather-card/card.component';
-import { AddCardComponent } from '@components/add-card/add-card.component';
-import { CityCardComponent } from '@components/city-card/city.card.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ErrorsModule } from './errors/errors.module';
 
-import { MainLayoutComponent } from '@app/pages/layouts/main/main.layout.component';
-import { InitialLayoutComponent } from '@app/pages/layouts/initial/initial.layout.component';
-import { HomeComponent } from '@app/pages/home/home.component';
-import { CityAddComponent } from '@app/pages/city/add/city.add.component';
-import { ManageComponent } from '@app/pages/city/manage/manage.component';
-import { LoginComponent } from '@app/pages/login/login.component';
-import { SignupComponent } from '@app/pages/signup/signup.component';
-
-import { AuthErrorInterceptor } from './interceptors/auth.error.interceptor';
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { AuthErrorInterceptor } from './core/interceptors/auth.error.interceptor';
+import { GlobalErrorHandler } from './core/global-error-handler/global-error-handler';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    InitialLayoutComponent,
-    CardComponent,
-    HomeComponent,
-    WeatherIconComponent,
-    AddCardComponent,
-    CityAddComponent,
-    CityCardComponent,
-    ManageComponent,
-    LoginComponent,
-    SignupComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    ErrorsModule,
-  ],
+  declarations: [AppComponent],
+  imports: [CommonModule, BrowserModule, BrowserAnimationsModule, AppRoutingModule, HttpClientModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

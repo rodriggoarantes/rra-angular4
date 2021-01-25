@@ -4,7 +4,9 @@
     "baseUrl": "src",
     "paths": {
       "@app/*": ["app/*"],
-      "@components/*": ["app/components/*"]
+      "@core/*": ["app/core/*"],
+      "@pages/*": ["app/pages/*"],
+      "@components/*": ["app/ui/components/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

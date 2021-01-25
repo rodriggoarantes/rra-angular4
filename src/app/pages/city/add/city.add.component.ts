@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription, Observable, Subject } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
+import { Subscription, Observable, Subject } from 'rxjs';
 
 import { WeatherService } from '@app/services/weather.service';
 import { CityService } from '@app/services/city.service';
 
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
-import { StatefulComponent } from '@app/core/StatefulComponent';
+import { StatefulComponent } from '@app/core/state/StatefulComponent';
 
 interface State {
   city: City;
