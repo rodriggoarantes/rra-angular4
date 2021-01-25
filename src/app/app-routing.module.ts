@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: 'sunshine',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/sunshine/sunshine.module').then((m) => m.SunshineModule),
   },
   {
