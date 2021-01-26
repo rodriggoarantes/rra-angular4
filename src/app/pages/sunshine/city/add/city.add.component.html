@@ -29,7 +29,7 @@
             <ng-container *ngIf="stateCityWeather | async as state">
               <ng-container *ngIf="state.weather">
                 <button class="search-city-btn" (click)="clearOption()">
-                  <img class="search-icon icon" src="assets/exclamation-icon.svg" />
+                  <mat-icon class="icon clear-icon" inline="true">clear</mat-icon>
                 </button>
               </ng-container>
             </ng-container>
@@ -43,7 +43,9 @@
               <app-city-card [weather]="weather"></app-city-card>
             </ng-container>
             <ng-container *ngIf="state.loading">
-              <div>Loading...</div>
+              <div class="city-loading">
+                <mat-spinner></mat-spinner>
+              </div>
             </ng-container>
           </ng-container>
         </div>

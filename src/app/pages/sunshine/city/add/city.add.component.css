@@ -238,3 +238,21 @@
   border: none;
   background-color: rgba(255, 255, 255, 0.6);
 }
+
+.clear-icon {
+  font-size: 3rem;
+  height: 50%;
+  color: #131f69;
+}
+
+.city-loading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding-top: 5rem;
+}
+.city-loading ::ng-deep .mat-progress-spinner circle,
+.city-loading .mat-spinner circle {
+  stroke: #ff9c4a !important;
+}

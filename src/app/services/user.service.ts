@@ -62,18 +62,18 @@ export class UserService {
   public isAuth(): boolean {
     if (this.userValue && this.userValue.token) {
       const payload: JwtPayload = jwtDecode<JwtPayload>(this.userValue.token);
-      console.log(`decoded: ${JSON.stringify(payload)} | now: ${new Date().getTime()}`);
       if (payload && payload.exp && this.notExpired(payload.exp)) {
         return true;
       }
     }
+    localStorage.removeItem(this.KEY);
     return false;
   }
 
   private notExpired(dateTime: number) {
     const now: number = new Date().getTime();
     const dataIso = parseInt(String(dateTime).padEnd(13, '1').substring(0, 13), 10);
-    console.log(`expired: ${dataIso > now}`);
+    console.log(`NotExpired: ${dataIso > now}`);
     return dataIso > now;
   }
 }

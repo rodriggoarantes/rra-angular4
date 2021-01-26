@@ -4,12 +4,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { Subscription, Observable, Subject } from 'rxjs';
 
-import { WeatherService } from '@app/services/weather.service';
+import { SuggestedStoreService } from '@app/stores/suggested-store.service';
 import { CityService } from '@app/services/city.service';
 
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
 import { StatefulComponent } from '@app/core/state/StatefulComponent';
+import { WeatherService } from '@app/services/weather.service';
 
 interface State {
   city: City;
@@ -33,7 +34,11 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
 
   private suggestedSubscription: Subscription;
 
-  constructor(private cityService: CityService, private weatherService: WeatherService) {
+  constructor(
+    private cityService: CityService,
+    private weatherService: WeatherService,
+    private suggestedStore: SuggestedStoreService
+  ) {
     super();
     this.setState(<State>{ city: null, suggested: null });
   }
@@ -74,7 +79,7 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
   }
 
   private _findSuggested() {
-    this.suggestedSubscription = this.weatherService.suggested().subscribe((item) => (this.state.suggested = item));
+    this.suggestedSubscription = this.suggestedStore.weather$.subscribe((item) => (this.state.suggested = item));
   }
 
   private _filter(value: any) {

@@ -22,7 +22,6 @@ export class InitialLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.data.subscribe((data) => {
-      console.log(JSON.stringify(data));
       if (data) {
         this.config = data as InitialData;
       }
