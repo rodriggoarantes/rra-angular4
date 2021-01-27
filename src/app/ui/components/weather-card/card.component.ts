@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { CityWeather } from '@app/models/CityWeather';
 import { UiService } from '@app/services/ui.service';
 import { WeatherService } from '@app/services/weather.service';
+import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
+import { ArrayType } from '@angular/compiler';
 
 @Component({
   selector: 'app-weather-card',
@@ -18,21 +20,21 @@ export class CardComponent implements OnInit, OnDestroy {
   darkMode: boolean;
 
   cityName = '';
-  state: string;
-  temp: number;
-  maxTemp: number;
-  minTemp: number;
+  state: string = '';
+  temp: number = 0;
+  maxTemp: number = 0;
+  minTemp: number = 0;
 
   private themeSubs: Subscription;
 
-  constructor(public router: Router, public uiService: UiService, public weather: WeatherService) {}
+  constructor(public router: Router, public uiService: UiService, public weatherStore: CityWeatherStoreService) {}
 
   ngOnInit() {
     this.themeSubs = this.uiService.darkModeState.subscribe((isDark) => {
       this.darkMode = isDark;
     });
 
-    this.loadCity(this.city);
+    this._loadWeather(this.city);
   }
 
   ngOnDestroy() {
@@ -44,22 +46,25 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   // ---
-  private loadCity(city: string) {
+  private _loadWeather(city: string) {
     if (!city) {
       console.log(`Cidade não informada: ${city}`);
       return;
     }
 
-    this.weather.find(city).subscribe(
-      (payload: CityWeather) => {
-        this.cityName = payload.city.name;
-        this.state = payload.state;
-        this.temp = Math.ceil(payload.temp);
-        this.maxTemp = Math.ceil(payload.max);
-        this.minTemp = Math.ceil(payload.min);
+    this.weatherStore.weathers$.subscribe(
+      (cityWeathers: Array<CityWeather>) => {
+        const weather = cityWeathers.find((w) => w.city._id === city);
+        if (weather) {
+          this.cityName = weather.city.name;
+          this.state = weather.state;
+          this.temp = Math.ceil(weather.temp);
+          this.maxTemp = Math.ceil(weather.max);
+          this.minTemp = Math.ceil(weather.min);
+        }
       },
       (err) => {
-        console.log(`ERRO: ${err.error.message}`);
+        console.log(`ERRO _loadWeather: ${err.error.message}`);
       }
     );
   }
