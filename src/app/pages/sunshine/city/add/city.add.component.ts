@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
-import { Subscription, Observable, Subject } from 'rxjs';
+import { Subscription, Observable, Subject, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { SuggestedStoreService } from '@app/stores/suggested-store.service';
 import { CityService } from '@app/services/city.service';
@@ -86,6 +87,13 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
     if (!value || typeof value !== 'string' || value.length < 3) {
       return [];
     }
-    this.filteredCities = this.cityService.search(value);
+    this.filteredCities = this.cityService.search(value).pipe(catchError(this._handleError<City[]>([])));
+  }
+
+  private _handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(`failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 }
