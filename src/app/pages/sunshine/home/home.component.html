@@ -1,6 +1,7 @@
 <div class="home-container">
-  <app-weather-card></app-weather-card>
-  <app-weather-card></app-weather-card>
+  <ng-container *ngFor="let city of userCities | async">
+    <app-weather-card [city]="city._id"></app-weather-card>
+  </ng-container>
 
   <app-add-card></app-add-card>
 </div>

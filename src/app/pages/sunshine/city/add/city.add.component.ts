@@ -92,7 +92,6 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
 
   private _handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      console.log(`failed: ${error.message}`);
       return of(result as T);
     };
   }

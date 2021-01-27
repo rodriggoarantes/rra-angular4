@@ -13,7 +13,7 @@ import { WeatherService } from '@app/services/weather.service';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit, OnDestroy {
-  @Input() city = 'NqNfAojUrow6agBMREAu';
+  @Input() city: string;
 
   darkMode: boolean;
 
@@ -39,7 +39,9 @@ export class CardComponent implements OnInit, OnDestroy {
     this.themeSubs.unsubscribe();
   }
 
-  openDetails() {}
+  openDetails() {
+    alert('TODO detalhes');
+  }
 
   // ---
   private loadCity(city: string) {

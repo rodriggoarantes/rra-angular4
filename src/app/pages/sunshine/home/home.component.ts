@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { CityWeather } from '@app/models/CityWeather';
+import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
+import { City } from '@app/models/City';
+import { CityUserStoreService } from '@app/stores/city-user-store.service';
 
 @Component({
   selector: 'app-home',
@@ -6,17 +12,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  public userCities: Observable<City[]>;
 
-  ngOnInit() {}
+  constructor(public cityStore: CityUserStoreService) {}
 
-  /**
-    from(rotinas)
-      .pipe(mergeMap((rotina: string) => this.permissaoRotinaService.getPermissoesNaRotina(rotina), 20))
-      .subscribe((res) => {
-        console.log(JSON.stringify(res));
-      });
+  ngOnInit() {
+    this._loading();
+  }
 
-    forkJoin(arrayObservable).subscribe((res) => console.log(JSON.stringify(res)));
-   */
+  private _loading() {
+    this.userCities = this.cityStore.cities$;
+  }
 }

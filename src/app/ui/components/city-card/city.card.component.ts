@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UiService } from '@app/services/ui.service';
 
 import { CityWeather } from '@app/models/CityWeather';
+import { CityUserStoreService } from '@app/stores/city-user-store.service';
 import { City } from '@app/models/City';
 
 @Component({
@@ -15,30 +16,37 @@ import { City } from '@app/models/City';
 })
 export class CityCardComponent implements OnInit, OnDestroy {
   @Input() weather: CityWeather = <CityWeather>{};
-  @Output() cityStored = new EventEmitter();
 
   darkMode: boolean;
+  added: boolean = false;
 
   private themeSubs: Subscription;
+  private cityWeatherStored: Subscription;
 
-  constructor(public router: Router, public uiService: UiService) {}
+  constructor(public router: Router, public uiService: UiService, public cityStore: CityUserStoreService) {}
 
   ngOnInit() {
     this.themeSubs = this.uiService.darkModeState.subscribe((isDark) => {
       this.darkMode = isDark;
     });
 
-    this.weather = <CityWeather>{
-      _id: '123124564',
-      city: <City>{ _id: '789', name: 'Paris' },
-      max: 50,
-      min: -10,
-      state: 'Clear',
-      temp: 31,
-    };
+    this._verifySelected();
   }
 
   ngOnDestroy() {
     this.themeSubs.unsubscribe();
+    this.cityWeatherStored.unsubscribe();
+  }
+
+  public addCity() {
+    this.cityStore.store(this.weather.city);
+  }
+
+  private _verifySelected() {
+    this.cityWeatherStored = this.cityStore.cities$.subscribe((list: Array<City>) => {
+      if (list && this.weather && this.weather.city) {
+        this.added = list.map((city) => city._id).includes(this.weather.city._id);
+      }
+    });
   }
 }
