@@ -26,8 +26,7 @@ export class CityUserStoreService {
   }
 
   public store(city: City) {
-    if (!city || !city._id) return;
-    if (this._includeCity(city._id)) return;
+    if (!city || !city._id || this._includeCity(city._id)) return;
 
     const list: Array<City> = [...this._listLocal(), city];
     localStorage.setItem(this.KEY, JSON.stringify(list));

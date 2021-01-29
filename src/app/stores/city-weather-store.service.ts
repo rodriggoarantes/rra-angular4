@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CityWeather } from '@app/models/CityWeather';
+import { City } from '@app/models/City';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +27,8 @@ export class CityWeatherStoreService {
   }
 
   public store(suggestedWeather: CityWeather) {
-    if (!suggestedWeather || !suggestedWeather.city || !suggestedWeather.city._id) return;
-    if (this._includeCity(suggestedWeather.city._id)) return;
+    if (!suggestedWeather || !suggestedWeather.city_id) return;
+    if (this._includeCity(suggestedWeather.city_id)) return;
 
     const list: Array<CityWeather> = [...this._listLocal(), suggestedWeather];
     localStorage.setItem(this.KEY, JSON.stringify(list));

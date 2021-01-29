@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CityWeather } from '@app/models/CityWeather';
-import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
 import { City } from '@app/models/City';
 import { CityUserStoreService } from '@app/stores/city-user-store.service';
-import { CityService } from '@app/services/city.service';
-import { WeatherService } from '@app/services/weather.service';
+import { PreferencesService } from '@app/services/preferences.service';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +13,7 @@ import { WeatherService } from '@app/services/weather.service';
 export class HomeComponent implements OnInit {
   public userCities: Observable<City[]>;
 
-  constructor(
-    public cityUserStore: CityUserStoreService,
-    public cityService: CityService,
-    public weatherService: WeatherService
-  ) {
+  constructor(private cityUserStore: CityUserStoreService, private preferenceService: PreferencesService) {
     this._loading();
   }
 
@@ -31,6 +24,8 @@ export class HomeComponent implements OnInit {
   private _loading() {
     const cities = this.cityUserStore.value;
     if (!cities || !cities.length) {
+      this.preferenceService.loadCities();
+      this.preferenceService.loadWeathers();
     }
   }
 

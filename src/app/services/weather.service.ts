@@ -15,39 +15,25 @@ export class WeatherService {
   constructor(public http: HttpClient) {}
 
   find(cityId: string): Observable<CityWeather> {
-    return this.http.get(`${this.api}/cities/${cityId}`).pipe(
-      map(
-        (item: any) =>
-          <CityWeather>{
-            city: { _id: cityId, name: item.city },
-            state: item.state,
-            temp: item.temp,
-            min: item.min,
-            max: item.max,
-            pressure: item.pressure,
-            humidity: item.pressure,
-            dt: item.dt,
-          }
-      )
-    );
+    return this.http.get(`${this.api}/cities/${cityId}`).pipe(map((item: any) => this._mapWeather(item)));
   }
 
   suggested(): Observable<CityWeather> {
-    return this.http.get(`${this.api}/suggested`).pipe(
-      map(
-        (item: any) =>
-          <CityWeather>{
-            city: { _id: item.city_id, name: item.city, country: item.country },
-            state: item.state,
-            temp: item.temp,
-            min: item.min,
-            max: item.max,
-            pressure: item.pressure,
-            humidity: item.pressure,
-            dt: new Date(item.dt),
-            city_picture: item.city_picture,
-          }
-      )
-    );
+    return this.http.get(`${this.api}/suggested`).pipe(map((item: any) => this._mapWeather(item)));
+  }
+
+  private _mapWeather(item: any): CityWeather {
+    return <CityWeather>{
+      city: { _id: item.city_id, name: item.city, country: item.country },
+      city_id: item.city_id,
+      state: item.state,
+      temp: item.temp,
+      min: item.min,
+      max: item.max,
+      pressure: item.pressure,
+      humidity: item.pressure,
+      dt: new Date(item.dt),
+      city_picture: item.city_picture,
+    };
   }
 }

@@ -8,6 +8,7 @@ import { UiService } from '@app/services/ui.service';
 import { CityWeather } from '@app/models/CityWeather';
 import { CityUserStoreService } from '@app/stores/city-user-store.service';
 import { City } from '@app/models/City';
+import { PreferencesService } from '@app/services/preferences.service';
 
 @Component({
   selector: 'app-city-card',
@@ -23,7 +24,12 @@ export class CityCardComponent implements OnInit, OnDestroy {
   private themeSubs: Subscription;
   private cityWeatherStored: Subscription;
 
-  constructor(public router: Router, public uiService: UiService, public cityStore: CityUserStoreService) {}
+  constructor(
+    public router: Router,
+    private uiService: UiService,
+    private cityStore: CityUserStoreService,
+    private preferenceService: PreferencesService
+  ) {}
 
   ngOnInit() {
     this.themeSubs = this.uiService.darkModeState.subscribe((isDark) => {
@@ -38,8 +44,8 @@ export class CityCardComponent implements OnInit, OnDestroy {
     this.cityWeatherStored.unsubscribe();
   }
 
-  public addCity() {
-    this.cityStore.store(this.weather.city);
+  public add() {
+    this.preferenceService.add(this.weather.city, this.weather);
   }
 
   private _verifySelected() {

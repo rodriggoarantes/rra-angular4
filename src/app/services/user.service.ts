@@ -73,7 +73,6 @@ export class UserService {
   private notExpired(dateTime: number) {
     const now: number = new Date().getTime();
     const dataIso = parseInt(String(dateTime).padEnd(13, '1').substring(0, 13), 10);
-    console.log(`NotExpired: ${dataIso > now}`);
     return dataIso > now;
   }
 }
