@@ -9,7 +9,7 @@ import { LayoutsModule } from '@app/ui/layouts/app.module-layouts';
 
 import { HomeComponent } from './home/home.component';
 import { CityAddComponent } from './city/add/city.add.component';
-import { ManageComponent } from './city/manage/manage.component';
+import { DetailComponent } from './city/detail/detail.component';
 
 import { SunshineRoutingModule } from './sunshine-routing.module';
 
@@ -24,6 +24,6 @@ import { SunshineRoutingModule } from './sunshine-routing.module';
     ComponentsUIModule,
     SunshineRoutingModule,
   ],
-  declarations: [HomeComponent, CityAddComponent, ManageComponent],
+  declarations: [HomeComponent, CityAddComponent, DetailComponent],
 })
 export class SunshineModule {}

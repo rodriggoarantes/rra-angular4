@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
 import { CityWeather } from '@app/models/CityWeather';
 import { UiService } from '@app/services/ui.service';
-import { WeatherService } from '@app/services/weather.service';
 import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
-import { ArrayType } from '@angular/compiler';
 
 @Component({
   selector: 'app-weather-card',
@@ -27,7 +25,12 @@ export class CardComponent implements OnInit, OnDestroy {
 
   private themeSubs: Subscription;
 
-  constructor(public router: Router, public uiService: UiService, public weatherStore: CityWeatherStoreService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public uiService: UiService,
+    public weatherStore: CityWeatherStoreService
+  ) {}
 
   ngOnInit() {
     this.themeSubs = this.uiService.darkModeState.subscribe((isDark) => {
@@ -42,7 +45,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   openDetails() {
-    alert('TODO detalhes');
+    this.router.navigate(['detail', { cityId: this.city }], { relativeTo: this.route });
   }
 
   // ---

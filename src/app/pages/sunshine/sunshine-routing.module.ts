@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { CityAddComponent } from './city/add/city.add.component';
-import { ManageComponent } from './city/manage/manage.component';
+import { DetailComponent } from './city/detail/detail.component';
 
 export const routes: Routes = [
   {
@@ -16,8 +16,8 @@ export const routes: Routes = [
     component: CityAddComponent,
   },
   {
-    path: 'manage',
-    component: ManageComponent,
+    path: 'detail',
+    component: DetailComponent,
   },
 ];
 

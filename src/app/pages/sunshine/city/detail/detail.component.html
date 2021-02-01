@@ -1,0 +1,5 @@
+<div class="container">
+  <ng-container *ngIf="city$ | async as state">
+    <h1> {{state.name}}</h1>
+  </ng-container>
+</div>

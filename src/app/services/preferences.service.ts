@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/../environments/environment';
 
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay, tap, catchError } from 'rxjs/operators';
 
 import { CityUserStoreService } from '@app/stores/city-user-store.service';
 import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
@@ -34,9 +34,10 @@ export class PreferencesService {
 
   public findWeathers(): Observable<Array<CityWeather>> {
     const user = this.userService.userValue;
-    return this.http
-      .get<Array<CityWeather>>(`${this.api}/${user._id}/weathers`)
-      .pipe(map((data: Array<any>) => data.map((item) => this._mapWeather(item))));
+    return this.http.get<Array<CityWeather>>(`${this.api}/${user._id}/weathers`).pipe(
+      map((data: Array<any>) => data.map((item) => this._mapWeather(item))),
+      catchError(this._handleError<CityWeather[]>([]))
+    );
   }
 
   public loadCities() {
@@ -82,6 +83,17 @@ export class PreferencesService {
   }
 
   // --------------------
+
+  private _handleError<T>(result?: T) {
+    return (): Observable<T> => {
+      this.weatherUserStore.clear();
+      return of(result as T).pipe(
+        tap(() => this.weatherUserStore.clear()),
+        delay(2000),
+        tap(() => this.loadWeathers())
+      );
+    };
+  }
 
   private _mapWeather(item: any): CityWeather {
     return <CityWeather>{
