@@ -1,5 +1,59 @@
-<div class="container">
-  <ng-container *ngIf="city$ | async as state">
-    <h1> {{state.name}}</h1>
+<div class="container" [ngClass]="{'container-dark': darkMode}">
+  <ng-container *ngIf="city$ | async as cityState">
+
+    <div class="background-gradient__circle" [ngClass]="{'background-gradient__circle-dark': darkMode}"></div>
+
+    <img class="back__button" src="/./assets/city-back-button.svg" />
+
+    <section class="main-weather__card">
+      <section class="card-header__container-dark">
+
+        <img class="city__illustration" [src]="cityIllustrationPath" />
+
+        <div class="header-content__wrapper">
+          <div class="today-weather__container">
+            <!--{{today}}-->
+            <div class="temp-state__container">
+              <span class="temperature__text">99°</span>
+              <span class="weather-state__text">CLOUDS</span>
+            </div>
+            <div class="hum-wind__container">
+              <div class="hum__container">
+                <span class="hum__text">humidity</span>
+                <span class="hum-value__text">99 %</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">wind</span>
+                <span class="wind-value__text">99 K/M</span>
+              </div>
+            </div>
+          </div>
+          <div class="city-name__container">
+            <div class="city-name__underline">
+              <span class="city-name__text">{{cityState.name}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main class="body-content__wrapper">
+        <section class="forecast__container">
+
+
+
+
+          <div class="day-weather__container" *ngFor="let day of forecast$ | async">
+            <span class="day-name__text">SAB</span>
+
+            <app-weather-icon state="RAIN"></app-weather-icon>
+
+            <span class="day-temp__text">99°</span>
+            <span class="day-state__text">CHUVA</span>
+          </div>
+        </section>
+      </main>
+    </section>
+
   </ng-container>
 </div>
