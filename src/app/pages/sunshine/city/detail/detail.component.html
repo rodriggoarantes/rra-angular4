@@ -1,9 +1,9 @@
 <div class="container" [ngClass]="{'container-dark': darkMode}">
-  <ng-container *ngIf="city$ | async as cityState">
+
 
     <div class="background-gradient__circle" [ngClass]="{'background-gradient__circle-dark': darkMode}"></div>
 
-    <img class="back__button" src="/./assets/city-back-button.svg" />
+    <img class="back__button" src="/./assets/city-back-button.svg" (click)="backHome()"/>
 
     <section class="main-weather__card">
       <section class="card-header__container-dark">
@@ -11,29 +11,35 @@
         <img class="city__illustration" [src]="cityIllustrationPath" />
 
         <div class="header-content__wrapper">
+
+          <ng-container *ngIf="weather$ | async as weatherState">
           <div class="today-weather__container">
-            <!--{{today}}-->
             <div class="temp-state__container">
-              <span class="temperature__text">99°</span>
-              <span class="weather-state__text">CLOUDS</span>
+              <span class="temperature__text">{{weatherState.temp}}°</span>
+              <span class="weather-state__text">{{weatherState.state}}</span>
             </div>
             <div class="hum-wind__container">
               <div class="hum__container">
-                <span class="hum__text">humidity</span>
-                <span class="hum-value__text">99 %</span>
+                <span class="hum__text">Max</span>
+                <span class="hum-value__text">{{weatherState.max}}°</span>
               </div>
               <div class="hum-wind__separator">&nbsp;</div>
               <div class="wind__container">
-                <span class="wind__text">wind</span>
-                <span class="wind-value__text">99 K/M</span>
+                <span class="wind__text">Min</span>
+                <span class="wind-value__text">{{weatherState.min}}°</span>
               </div>
             </div>
           </div>
+          </ng-container>
+
+          <ng-container *ngIf="city$ | async as cityState">
           <div class="city-name__container">
             <div class="city-name__underline">
               <span class="city-name__text">{{cityState.name}}</span>
             </div>
           </div>
+          </ng-container>
+
         </div>
       </section>
 
@@ -55,5 +61,4 @@
       </main>
     </section>
 
-  </ng-container>
 </div>
