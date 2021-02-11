@@ -32,30 +32,46 @@
           </div>
           </ng-container>
 
-          <ng-container *ngIf="city$ | async as cityState">
-          <div class="city-name__container">
-            <div class="city-name__underline">
-              <span class="city-name__text">{{cityState.name}}</span>
+          <div class="today-weather__container">
+            <ng-container *ngIf="city$ | async as cityState">
+            <div class="city-name__container">
+              <div class="city-name__underline">
+                <span class="city-name__text">{{cityState.name}}</span>
+              </div>
             </div>
-          </div>
-          </ng-container>
+            </ng-container>
 
+            <ng-container *ngIf="today$ | async as todayState">
+            <div class="hum-wind__container">
+              <div class="hum__container">
+                <span class="hum__text">Humidade</span>
+                <span class="hum-value__text">{{todayState.humidity}}%</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">Vento</span>
+                <span class="wind-value__text">{{todayState.wind_speed}} KM/h</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">Pressão</span>
+                <span class="wind-value__text">{{todayState.pressure}} hPa</span>
+              </div>
+            </div>
+            </ng-container>
+          </div>
         </div>
       </section>
 
       <main class="body-content__wrapper">
         <section class="forecast__container">
-
-
-
-
           <div class="day-weather__container" *ngFor="let day of forecast$ | async">
-            <span class="day-name__text">SAB</span>
+            <span class="day-name__text">{{day.weekday}}</span>
 
-            <app-weather-icon state="RAIN"></app-weather-icon>
+            <app-weather-icon [state]="day.state"></app-weather-icon>
 
-            <span class="day-temp__text">99°</span>
-            <span class="day-state__text">CHUVA</span>
+            <span class="day-temp__text">{{day.temp}}°</span>
+            <span class="day-state__text">{{day.state}}</span>
           </div>
         </section>
       </main>

@@ -5,12 +5,14 @@ import { Observable, of, Subscription } from 'rxjs';
 import { switchMap, first, mergeMap, map } from 'rxjs/operators';
 
 import { UiService } from '@app/services/ui.service';
+import { ForecastService } from '@app/services/forecast.service';
 
 import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
 import { CityUserStoreService } from '@app/stores/city-user-store.service';
 
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
+import { Forecast } from '@app/models/Forecast';
 
 @Component({
   selector: 'app-detail',
@@ -20,21 +22,22 @@ import { CityWeather } from '@app/models/CityWeather';
 export class DetailComponent implements OnInit {
   private selectedCityId: string;
   private themeSubs: Subscription;
-  private cityWeatherStoreSubs: Subscription;
 
   darkMode: boolean;
   cityIllustrationPath = '/./assets/city-background-default.svg';
 
   city$: Observable<City>;
   weather$: Observable<CityWeather>;
-  forecast$: Observable<Array<CityWeather>>;
+  forecast$: Observable<Array<Forecast>>;
+  today$: Observable<Forecast>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public uiService: UiService,
     private readonly cityUserStore: CityUserStoreService,
-    private readonly weatherStore: CityWeatherStoreService
+    private readonly weatherStore: CityWeatherStoreService,
+    private readonly forecastService: ForecastService
   ) {}
 
   ngOnInit() {
@@ -46,6 +49,11 @@ export class DetailComponent implements OnInit {
       this.selectedCityId = cityId;
       this.city$ = this._observableCity();
       this.weather$ = this._observableWeather();
+      this.forecast$ = this._observableForecasts();
+      this.today$ = this.forecast$.pipe(
+        mergeMap((data: Array<CityWeather>) => data),
+        first()
+      );
     });
   }
 
@@ -78,5 +86,9 @@ export class DetailComponent implements OnInit {
         return weather;
       })
     );
+  }
+
+  private _observableForecasts(): Observable<Array<Forecast>> {
+    return this.forecastService.find(this.selectedCityId);
   }
 }

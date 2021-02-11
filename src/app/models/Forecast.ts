@@ -1,6 +1,6 @@
 import { City } from './City';
 
-export interface CityWeather {
+export interface Forecast {
   _id?: string;
   city: City;
   city_id: string;
@@ -8,6 +8,10 @@ export interface CityWeather {
   temp: number;
   max: number;
   min: number;
+  pressure?: number;
+  humidity?: number;
+  wind_speed?: number;
   dt?: Date;
-  city_picture?: any;
+  date_txt?: string;
+  weekday?: string;
 }

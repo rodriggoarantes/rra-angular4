@@ -31,7 +31,7 @@ export class WeatherService {
       min: item.min,
       max: item.max,
       pressure: item.pressure,
-      humidity: item.pressure,
+      humidity: item.humidity,
       dt: new Date(item.dt),
       city_picture: item.city_picture,
     };
