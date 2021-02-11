@@ -3,7 +3,7 @@
     <section class="main-card">
       <div class="city-search-wrapper">
         <div class="city-search-header">
-          <h3 class="city-search-title">SEARCH CITIES</h3>
+          <h3 class="city-search-title">Buscar Cidades</h3>
           <div class="search-city-input-wrapper">
             <form class="example-form">
               <input
@@ -79,7 +79,7 @@
                   </div>
                   <span class="fav-city-state">{{ suggested.state }}</span>
                 </div>
-                <button class="fav-city-add-btn" *ngIf="true">
+                <button class="fav-city-add-btn" *ngIf="!state.addedSuggested" (click)="addSuggested()">
                   Adicionar Cidade
                 </button>
               </div>

@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { UiService } from '@app/services/ui.service';
+import { PreferencesService } from '@app/services/preferences.service';
+
+import { CityUserStoreService } from '@app/stores/city-user-store.service';
 
 import { CityWeather } from '@app/models/CityWeather';
-import { CityUserStoreService } from '@app/stores/city-user-store.service';
 import { City } from '@app/models/City';
-import { PreferencesService } from '@app/services/preferences.service';
 
 @Component({
   selector: 'app-city-card',

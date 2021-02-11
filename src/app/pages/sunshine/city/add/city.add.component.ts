@@ -5,17 +5,21 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Subscription, Observable, Subject, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { SuggestedStoreService } from '@app/stores/suggested-store.service';
 import { CityService } from '@app/services/city.service';
+import { WeatherService } from '@app/services/weather.service';
+import { PreferencesService } from '@app/services/preferences.service';
 
+import { SuggestedStoreService } from '@app/stores/suggested-store.service';
+import { CityUserStoreService } from '@app/stores/city-user-store.service';
+
+import { StatefulComponent } from '@app/core/state/StatefulComponent';
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
-import { StatefulComponent } from '@app/core/state/StatefulComponent';
-import { WeatherService } from '@app/services/weather.service';
 
 interface State {
   city: City;
   suggested: CityWeather;
+  addedSuggested: boolean;
 }
 
 interface StateWeather {
@@ -34,11 +38,14 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
   stateCityWeather: Subject<StateWeather> = new Subject();
 
   private suggestedSubscription: Subscription;
+  private cityWeatherStored: Subscription;
 
   constructor(
-    private cityService: CityService,
-    private weatherService: WeatherService,
-    private suggestedStore: SuggestedStoreService
+    private readonly cityService: CityService,
+    private readonly weatherService: WeatherService,
+    private readonly suggestedStore: SuggestedStoreService,
+    private readonly cityStore: CityUserStoreService,
+    private readonly preferenceService: PreferencesService
   ) {
     super();
     this.setState(<State>{ city: null, suggested: null });
@@ -50,9 +57,8 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
   }
 
   ngOnDestroy(): void {
-    if (this.suggestedSubscription) {
-      this.suggestedSubscription.unsubscribe();
-    }
+    this.suggestedSubscription.unsubscribe();
+    this.cityWeatherStored.unsubscribe();
   }
 
   displayFn(param: City): string {
@@ -64,10 +70,8 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
       const cidade: City = event.option.value;
       console.log(`Selecionada: ${JSON.stringify(cidade)}`);
 
-      // TODO acrescentar um loading ao selecionar uma cidade
       this.stateCityWeather.next(<StateWeather>{ loading: true });
 
-      // TODO pesquisar o CityWeather da cidae escolhida
       this.weatherService.find(cidade._id).subscribe((cityWeather) => {
         this.stateCityWeather.next(<StateWeather>{ loading: false, weather: cityWeather });
       });
@@ -79,8 +83,25 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
     this.stateCityWeather.next(<StateWeather>{ loading: false, weather: null });
   }
 
+  addSuggested() {
+    const { suggested } = this.state;
+    this.preferenceService.add(suggested.city, suggested);
+  }
+
   private _findSuggested() {
-    this.suggestedSubscription = this.suggestedStore.weather$.subscribe((item) => (this.state.suggested = item));
+    this.suggestedSubscription = this.suggestedStore.weather$.subscribe((item) => {
+      this.state.suggested = item;
+      this._verifySelected();
+    });
+  }
+
+  private _verifySelected() {
+    this.cityWeatherStored = this.cityStore.cities$.subscribe((list: Array<City>) => {
+      const weather = this.state.suggested;
+      if (list && weather && weather.city) {
+        this.state.addedSuggested = list.map((city) => city._id).includes(weather.city._id);
+      }
+    });
   }
 
   private _filter(value: any) {
@@ -91,8 +112,6 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
   }
 
   private _handleError<T>(result?: T) {
-    return (error: any): Observable<T> => {
-      return of(result as T);
-    };
+    return (): Observable<T> => of(result as T);
   }
 }
