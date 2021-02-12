@@ -90,13 +90,20 @@
 }
 
 .city-name__container {
-  display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 10%;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 2rem;
 }
 
 .city-name__underline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: transparent;
   border-radius: 5px;
   height: 5px;
@@ -106,8 +113,7 @@
 .city-name__text {
   text-transform: uppercase;
   letter-spacing: 0.3rem;
-  font-size: 1.75rem;
-  padding-bottom: 2rem;
+  font-size: 2rem;
 }
 
 .today-weather__container {
@@ -232,6 +238,31 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   color: #2b244d;
+}
+
+.weather-icon-container {
+  width: 7rem;
+  height: 8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.city-remove-btn {
+  cursor: pointer;
+  outline: none;
+  margin: 0 0 1rem 2rem;
+  border: 2px solid rgb(153, 34, 34);
+  border-radius: 3rem;
+  padding: 0.8rem 1rem;
+  background-color: transparent;
+  color: rgb(153, 34, 34);
+  font-weight: bold;
+}
+
+.city-remove-btn:hover {
+  color: white;
+  background-color: red;
 }
 
 /* Media Query:   LT-XL   */

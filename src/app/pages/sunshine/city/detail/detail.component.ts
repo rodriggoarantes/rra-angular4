@@ -6,6 +6,7 @@ import { switchMap, first, mergeMap, map } from 'rxjs/operators';
 
 import { UiService } from '@app/services/ui.service';
 import { ForecastService } from '@app/services/forecast.service';
+import { PreferencesService } from '@app/services/preferences.service';
 
 import { CityWeatherStoreService } from '@app/stores/city-weather-store.service';
 import { CityUserStoreService } from '@app/stores/city-user-store.service';
@@ -37,7 +38,8 @@ export class DetailComponent implements OnInit {
     public uiService: UiService,
     private readonly cityUserStore: CityUserStoreService,
     private readonly weatherStore: CityWeatherStoreService,
-    private readonly forecastService: ForecastService
+    private readonly forecastService: ForecastService,
+    private readonly preferenceService: PreferencesService
   ) {}
 
   ngOnInit() {
@@ -63,6 +65,12 @@ export class DetailComponent implements OnInit {
 
   backHome() {
     this.router.navigate(['/sunshine']);
+  }
+
+  removerCidade() {
+    this.preferenceService.remove(this.selectedCityId).subscribe(() => {
+      this.router.navigate(['/sunshine']);
+    });
   }
 
   // ---

@@ -35,6 +35,8 @@
           <div class="today-weather__container">
             <ng-container *ngIf="city$ | async as cityState">
             <div class="city-name__container">
+              <img *ngIf="cityState.countryCode" src="https://www.countryflags.io/{{cityState.countryCode}}/flat/64.png">
+
               <div class="city-name__underline">
                 <span class="city-name__text">{{cityState.name}}</span>
               </div>
@@ -68,13 +70,19 @@
           <div class="day-weather__container" *ngFor="let day of forecast$ | async">
             <span class="day-name__text">{{day.weekday}}</span>
 
-            <app-weather-icon [state]="day.state"></app-weather-icon>
+            <div class="weather-icon-container">
+              <app-weather-icon [state]="day.state"></app-weather-icon>
+            </div>
 
             <span class="day-temp__text">{{day.temp}}°</span>
             <span class="day-state__text">{{day.state}}</span>
           </div>
         </section>
       </main>
+
+      <button class="city-remove-btn" (click)="removerCidade()">
+        Remover Cidade
+      </button>
     </section>
 
 </div>

@@ -82,6 +82,17 @@ export class PreferencesService {
     await this.http.post<void>(`${this.api}/${user._id}/cities/${city._id}`, {}).toPromise();
   }
 
+  remove(cityId: string): Observable<void> {
+    if (!cityId) {
+      throw Error('Cidade não informada para remocao');
+    }
+
+    const user = this.userService.userValue;
+    return this.http
+      .delete<void>(`${this.api}/${user._id}/cities/${cityId}`)
+      .pipe(tap(() => this.cityUserStore.remove(cityId)));
+  }
+
   // --------------------
 
   private _handleError<T>(result?: T) {

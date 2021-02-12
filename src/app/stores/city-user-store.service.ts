@@ -33,6 +33,19 @@ export class CityUserStoreService {
     this.subject.next(list);
   }
 
+  public remove(cityId: string) {
+    if (!cityId || !this._includeCity(cityId)) return;
+
+    const listLocal = this._listLocal();
+    const index = listLocal.findIndex((city) => city._id === cityId);
+    if (index > -1) {
+      listLocal.splice(index, 1);
+    }
+
+    localStorage.setItem(this.KEY, JSON.stringify(listLocal));
+    this.subject.next(listLocal);
+  }
+
   private _listLocal(): Array<City> {
     const listLocal = JSON.parse(localStorage.getItem(this.KEY));
     if (listLocal && listLocal.length) {
