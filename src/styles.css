@@ -26,6 +26,16 @@ button {
   cursor: pointer;
 }
 
+.snackbar-success-style {
+  background-color: green;
+  color: white;
+}
+
+.snackbar-error-style {
+  background-color: brown;
+  color: white;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;

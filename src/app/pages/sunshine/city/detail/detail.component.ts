@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Observable, of, Subscription } from 'rxjs';
 import { switchMap, first, mergeMap, map } from 'rxjs/operators';
 
@@ -14,6 +16,7 @@ import { CityUserStoreService } from '@app/stores/city-user-store.service';
 import { City } from '@app/models/City';
 import { CityWeather } from '@app/models/CityWeather';
 import { Forecast } from '@app/models/Forecast';
+import alertConfig from '@app/models/Alert';
 
 @Component({
   selector: 'app-detail',
@@ -36,6 +39,7 @@ export class DetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public uiService: UiService,
+    private readonly alert: MatSnackBar,
     private readonly cityUserStore: CityUserStoreService,
     private readonly weatherStore: CityWeatherStoreService,
     private readonly forecastService: ForecastService,
@@ -69,6 +73,8 @@ export class DetailComponent implements OnInit {
 
   removerCidade() {
     this.preferenceService.remove(this.selectedCityId).subscribe(() => {
+      this.alert.open('Cidade removida com sucesso', 'Fechar', alertConfig.success);
+
       this.router.navigate(['/sunshine']);
     });
   }

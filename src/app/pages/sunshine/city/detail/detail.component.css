@@ -252,11 +252,11 @@
   cursor: pointer;
   outline: none;
   margin: 0 0 1rem 2rem;
-  border: 2px solid rgb(153, 34, 34);
+  border: 2px solid brown;
   border-radius: 3rem;
   padding: 0.8rem 1rem;
   background-color: transparent;
-  color: rgb(153, 34, 34);
+  color: brown;
   font-weight: bold;
 }
 
@@ -264,6 +264,8 @@
   color: white;
   background-color: red;
 }
+
+/*****************************************/
 
 /* Media Query:   LT-XL   */
 @media screen and (max-width: 1919px) {
