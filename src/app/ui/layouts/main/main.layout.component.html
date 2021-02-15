@@ -1,0 +1,60 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="drawermenu.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img class="logo" src="assets/sunshine.png" />
+    <h1 class="title">{{ title }}</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="drawer-container" autosize>
+    <mat-sidenav
+      #drawermenu
+      mode="over"
+      [(opened)]="opened"
+      (opened)="events.push('open!')"
+      (closed)="events.push('close!')"
+      fixedTopGap="56"
+    >
+      <div class="slide-menu-container">
+        <section class="menu-header">
+          <span class="greeting">BEM VINDO</span>
+          <ng-container *ngIf="user$ | async as usuario">
+            <div class="profile-container">
+              <img
+                src="https://avatars.dicebear.com/4.5/api/human/{{usuario.email}}.svg"
+                alt="profile-image"
+                class="profile-image"
+              />
+            </div>
+            <div class="account-details">
+                <span class="name">{{ usuario.name }}</span>
+                <span class="email">{{ usuario.email }}</span>
+            </div>
+          </ng-container>
+        </section>
+        <section class="menu-body">
+          <mat-nav-list class="menu-links">
+            <ng-container *ngFor="let mop of menuOptions$ | async">
+              <div
+                class="menu-link"
+                [routerLink]="mop.link"
+              >
+                {{mop.name}}
+              </div>
+            </ng-container>
+            <div class="menu-link" (click)="logout()">Sair</div>
+          </mat-nav-list>
+        </section>
+        <section class="menu-footer">
+          <small class="copyright">Copyright © 2020 R1</small>
+        </section>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

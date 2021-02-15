@@ -1,0 +1,13 @@
+.home-container {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 1vh;
+
+  height: auto !important;
+  min-height: calc(99vh - 64px);
+
+  background-image: linear-gradient(to top, #5ee7df 0%, #66a6ff 100%);
+}

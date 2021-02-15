@@ -1,0 +1,24 @@
+<section class="card" (click)="openDetails()">
+  <span class="city-name">{{ cityName }}</span>
+
+  <div class="weather-icon-container">
+    <app-weather-icon [state]="state"></app-weather-icon>
+  </div>
+
+  <div>
+    <span class="temperature-metric">{{ temp }}°</span>
+    <span class="weather-condition">{{ state }}</span>
+  </div>
+  <section class="min-max-container">
+    <div class="temp-container">
+      <img class="temp-arrow" src="assets/min-temp.svg" />
+      <span class="temperature-text">{{ minTemp }}</span>
+      <span class="min-text">Min</span>
+    </div>
+    <div class="temp-container">
+      <img class="temp-arrow max-arrow" src="assets/max-temp.svg" />
+      <span class="temperature-text">{{ maxTemp }}</span>
+      <span class="max-text">Max</span>
+    </div>
+  </section>
+</section>

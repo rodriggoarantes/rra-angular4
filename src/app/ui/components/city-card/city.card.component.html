@@ -1,0 +1,25 @@
+<section class="card">
+  <div class="weather-icon-container">
+    <app-weather-icon [state]="weather.state" size="100"></app-weather-icon>
+    <span class="weather-condition">{{ weather.state }}</span>
+  </div>
+
+  <div class="city-container">
+    <span class="city-name">{{ weather.city.name }}</span>
+    <section class="min-max-container">
+      <span class="temperature-metric">{{ weather.temp }}°</span>
+      <div class="temp-container">
+        <img class="temp-arrow" src="assets/min-temp.svg" />
+        <span class="temperature-text">{{ weather.min }}</span>
+        <span class="min-text">Min</span>
+      </div>
+      <div class="temp-container">
+        <img class="temp-arrow max-arrow" src="assets/max-temp.svg" />
+        <span class="temperature-text">{{ weather.max }}</span>
+        <span class="max-text">Max</span>
+      </div>
+    </section>
+  </div>
+
+  <button class="add-city-btn" *ngIf="!added" (click)="add()">ADD +</button>
+</section>

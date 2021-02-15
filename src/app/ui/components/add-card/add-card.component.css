@@ -1,0 +1,45 @@
+.card {
+  background-color: white;
+  box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  padding: 2rem;
+  margin: 2rem;
+  width: 16rem;
+  height: 28rem;
+  cursor: pointer;
+  border-radius: 1.75rem;
+  animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0ms 1;
+  color: #443282;
+}
+
+.card-dark {
+  background: linear-gradient(to bottom, #711b86, #00057a);
+  color: white;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.body {
+  width: 100%;
+  align-self: end;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column;
+}
+
+.add-icon {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 25px;
+}
+
+.city-icon {
+  width: 90%;
+}

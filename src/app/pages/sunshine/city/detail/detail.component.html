@@ -1,0 +1,88 @@
+<div class="container" [ngClass]="{'container-dark': darkMode}">
+
+
+    <div class="background-gradient__circle" [ngClass]="{'background-gradient__circle-dark': darkMode}"></div>
+
+    <img class="back__button" src="/./assets/city-back-button.svg" (click)="backHome()"/>
+
+    <section class="main-weather__card">
+      <section class="card-header__container-dark">
+
+        <img class="city__illustration" [src]="cityIllustrationPath" />
+
+        <div class="header-content__wrapper">
+
+          <ng-container *ngIf="weather$ | async as weatherState">
+          <div class="today-weather__container">
+            <div class="temp-state__container">
+              <span class="temperature__text">{{weatherState.temp}}°</span>
+              <span class="weather-state__text">{{weatherState.state}}</span>
+            </div>
+            <div class="hum-wind__container">
+              <div class="hum__container">
+                <span class="hum__text">Max</span>
+                <span class="hum-value__text">{{weatherState.max}}°</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">Min</span>
+                <span class="wind-value__text">{{weatherState.min}}°</span>
+              </div>
+            </div>
+          </div>
+          </ng-container>
+
+          <div class="today-weather__container">
+            <ng-container *ngIf="city$ | async as cityState">
+            <div class="city-name__container">
+              <img *ngIf="cityState.countryCode" src="https://www.countryflags.io/{{cityState.countryCode}}/flat/64.png">
+
+              <div class="city-name__underline">
+                <span class="city-name__text">{{cityState.name}}</span>
+              </div>
+            </div>
+            </ng-container>
+
+            <ng-container *ngIf="today$ | async as todayState">
+            <div class="hum-wind__container">
+              <div class="hum__container">
+                <span class="hum__text">Humidade</span>
+                <span class="hum-value__text">{{todayState.humidity}}%</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">Vento</span>
+                <span class="wind-value__text">{{todayState.wind_speed}} KM/h</span>
+              </div>
+              <div class="hum-wind__separator">&nbsp;</div>
+              <div class="wind__container">
+                <span class="wind__text">Pressão</span>
+                <span class="wind-value__text">{{todayState.pressure}} hPa</span>
+              </div>
+            </div>
+            </ng-container>
+          </div>
+        </div>
+      </section>
+
+      <main class="body-content__wrapper">
+        <section class="forecast__container">
+          <div class="day-weather__container" *ngFor="let day of forecast$ | async">
+            <span class="day-name__text">{{day.weekday}}</span>
+
+            <div class="weather-icon-container">
+              <app-weather-icon [state]="day.state"></app-weather-icon>
+            </div>
+
+            <span class="day-temp__text">{{day.temp}}°</span>
+            <span class="day-state__text">{{day.state}}</span>
+          </div>
+        </section>
+      </main>
+
+      <button class="city-remove-btn" (click)="removerCidade()">
+        Remover Cidade
+      </button>
+    </section>
+
+</div>
