@@ -17,38 +17,33 @@
       fixedTopGap="56"
     >
       <div class="slide-menu-container">
-        <section
-          class="menu-header"
-          [ngClass]="{ 'menu-header-dark': darkModeActive }"
-        >
+        <section class="menu-header">
           <span class="greeting">BEM VINDO</span>
-          <div class="profile-container">
-            <img
-              src="https://avatars.dicebear.com/4.5/api/human/rodrigo@arantes.svg"
-              alt="profile-image"
-              class="profile-image"
-            />
-          </div>
-          <div class="account-details">
-            <span class="name">{{ userName }}</span>
-            <span class="email">{{ userEmail }}</span>
-          </div>
+          <ng-container *ngIf="user$ | async as usuario">
+            <div class="profile-container">
+              <img
+                src="https://avatars.dicebear.com/4.5/api/human/{{usuario.email}}.svg"
+                alt="profile-image"
+                class="profile-image"
+              />
+            </div>
+            <div class="account-details">
+                <span class="name">{{ usuario.name }}</span>
+                <span class="email">{{ usuario.email }}</span>
+            </div>
+          </ng-container>
         </section>
         <section class="menu-body">
-          <mat-nav-list
-            class="menu-links"
-            [ngClass]="{ 'menu-links-dark': darkModeActive }"
-          >
-            <div
-              class="menu-link"
-              [routerLinkActiveOptions]="{ exact: true }"
-              routerLink=""
-              routerLinkActive="link-active"
-            >
-              Home
-            </div>
-            <div class="menu-link" *ngFor="let e of events">{{ e }}</div>
-            <div class="menu-link" (click)="logout()">Logout</div>
+          <mat-nav-list class="menu-links">
+            <ng-container *ngFor="let mop of menuOptions$ | async">
+              <div
+                class="menu-link"
+                [routerLink]="mop.link"
+              >
+                {{mop.name}}
+              </div>
+            </ng-container>
+            <div class="menu-link" (click)="logout()">Sair</div>
           </mat-nav-list>
         </section>
         <section class="menu-footer">

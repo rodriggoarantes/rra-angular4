@@ -40,8 +40,11 @@ export class WeatherIconComponent implements OnInit {
       case 'SMOKE':
         answer = 'fog-icon.svg';
         break;
+      case 'SNOW':
+        answer = 'snow-icon.svg';
+        break;
       default:
-        answer = 'exclamation-icon.svg';
+        answer = 'unknow-icon.svg';
     }
     return `${this.path}/${answer}`;
   }

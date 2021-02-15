@@ -35,7 +35,7 @@ export class ForecastService {
       dt: new Date(item.dt),
       date_txt: item.date_txt,
       city_picture: item.city_picture,
-      weekday: this._dayName(item.dt),
+      weekday: this._dayName(item.date_txt),
       wind_speed: item.wind_speed,
     };
   }
@@ -44,8 +44,10 @@ export class ForecastService {
     return (): Observable<T> => of(result as T);
   }
 
-  private _dayName(timevalue: number): string {
+  private _dayName(dateTxt: string): string {
     const locale = 'pt-br';
-    return new Date(timevalue).toLocaleDateString(locale, { weekday: 'short' });
+    const zone = 'T12:00:00Z';
+    const dateTimeZone = new Date(Date.parse(`${dateTxt}${zone}`));
+    return dateTimeZone.toLocaleDateString(locale, { weekday: 'short' });
   }
 }
