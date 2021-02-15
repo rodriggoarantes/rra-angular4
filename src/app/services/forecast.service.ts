@@ -46,7 +46,7 @@ export class ForecastService {
 
   private _dayName(dateTxt: string): string {
     const locale = 'pt-br';
-    const zone = 'T12:00:00Z';
+    const zone = 'T12:00';
     const dateTimeZone = new Date(Date.parse(`${dateTxt}${zone}`));
     return dateTimeZone.toLocaleDateString(locale, { weekday: 'short' });
   }
