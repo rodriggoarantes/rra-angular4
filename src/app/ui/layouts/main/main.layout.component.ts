@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 
 import { ClearService } from '@app/services/clear.service';
 import { UserService } from '@app/services/user.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { WeatherSchedulerService } from '@app/services/weather-scheduler.service';
+
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 interface UserData {
   name: string;
@@ -26,11 +28,17 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   events: string[] = [];
 
   public readonly menuOptions$: BehaviorSubject<Array<MenuOption>>;
-
-  private _userSubs: Subscription;
   public readonly user$: BehaviorSubject<UserData>;
 
-  constructor(private router: Router, private userService: UserService, private clearService: ClearService) {
+  private _userSubs: Subscription;
+  private _schedulerSubs: Subscription;
+
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private clearService: ClearService,
+    private readonly schedulerService: WeatherSchedulerService
+  ) {
     this.menuOptions$ = new BehaviorSubject([]);
     this.user$ = new BehaviorSubject(<UserData>{});
   }
@@ -38,10 +46,12 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._loadUser();
     this._loadMenu();
+    this._initSchedulerWeather();
   }
 
   ngOnDestroy() {
     this._userSubs.unsubscribe();
+    this._schedulerSubs.unsubscribe();
   }
 
   // --------------------
@@ -71,5 +81,9 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       const { name, email } = user || <UserData>{};
       this.user$.next({ name, email });
     });
+  }
+
+  private _initSchedulerWeather() {
+    this._schedulerSubs = this.schedulerService.init();
   }
 }
