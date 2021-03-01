@@ -46,7 +46,6 @@ export class UserService {
       })
       .pipe(
         map((user) => {
-          console.log(`Usuario Logado: ${JSON.stringify(user)}`);
           localStorage.setItem(this.KEY, JSON.stringify(user));
           this.userSubject.next(user);
           return user;

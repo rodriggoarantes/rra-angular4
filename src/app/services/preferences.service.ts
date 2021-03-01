@@ -50,7 +50,7 @@ export class PreferencesService {
         }
       },
       () => {
-        console.log(`Falhas ao obter cidades`);
+        console.error(`Falhas ao obter cidades`);
       }
     );
   }
@@ -65,7 +65,7 @@ export class PreferencesService {
         }
       },
       () => {
-        console.log(`Falhas ao obter climas`);
+        console.error(`Falhas ao obter climas`);
       }
     );
   }

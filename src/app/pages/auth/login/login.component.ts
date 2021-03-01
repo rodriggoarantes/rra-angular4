@@ -16,7 +16,6 @@ export class LoginComponent {
 
     if (form.valid && email && password) {
       this.userService.login(email, password).subscribe((user) => {
-        console.log(JSON.stringify(user));
         if (this.userService.isAuth()) {
           this.router.navigate(['/sunshine']);
         } else {

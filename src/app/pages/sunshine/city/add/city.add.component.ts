@@ -68,7 +68,6 @@ export class CityAddComponent extends StatefulComponent<State> implements OnInit
   selectOption(event: MatAutocompleteSelectedEvent) {
     if (event && event.option) {
       const cidade: City = event.option.value;
-      console.log(`Selecionada: ${JSON.stringify(cidade)}`);
 
       this.stateCityWeather.next(<StateWeather>{ loading: true });
 

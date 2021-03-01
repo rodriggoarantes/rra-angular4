@@ -51,7 +51,7 @@ export class CardComponent implements OnInit, OnDestroy {
   // ---
   private _loadWeather(city: string) {
     if (!city) {
-      console.log(`Cidade não informada: ${city}`);
+      console.error(`Cidade não informada: ${city}`);
       return;
     }
 
@@ -67,7 +67,7 @@ export class CardComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        console.log(`ERRO _loadWeather: ${err.error.message}`);
+        console.error(`ERRO _loadWeather: ${err.error.message}`);
       }
     );
   }

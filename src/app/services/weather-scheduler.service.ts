@@ -23,7 +23,6 @@ export class WeatherSchedulerService {
   // -----------------------
 
   private updateUserWeather(count: number) {
-    console.log(`Realizando atualização de clima: ${count}`);
     this.preferenceService.loadWeathers();
   }
 }
