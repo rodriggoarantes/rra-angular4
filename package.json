@@ -2,10 +2,12 @@
   "name": "sunshine",
   "version": "0.0.0",
   "scripts": {
+    "firebase": "firebase",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "prod": "ng build --prod"
+    "prod": "ng build --prod",
+    "deploy": "npm run prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
