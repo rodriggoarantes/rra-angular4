@@ -28,9 +28,13 @@ export class CityWeatherStoreService {
 
   public store(suggestedWeather: CityWeather) {
     if (!suggestedWeather || !suggestedWeather.city_id) return;
-    if (this._includeCity(suggestedWeather.city_id)) return;
 
-    const list: Array<CityWeather> = [...this._listLocal(), suggestedWeather];
+    let list: Array<CityWeather> = this._listLocal();
+    if (this._includeCity(suggestedWeather.city_id))
+      list = list.filter((cw) => cw.city._id !== suggestedWeather.city_id);
+
+    list.push(suggestedWeather);
+
     localStorage.setItem(this.KEY, JSON.stringify(list));
     this.subject.next(list);
   }
